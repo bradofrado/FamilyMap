@@ -1,0 +1,300 @@
+[Wed Oct 05 14:03:46 MDT 2022] - INFO passoff.ServerTest: 	Setting up Persistence Test...
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Proxy: 	Clear called
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Post without Request Body called
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Attempting to open connection to server
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Connection opened to server
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Setting passoffrequest method to POST
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Request method set to POST
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Setting Do Output to true
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Do Output set to true
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Connecting to server
+[Wed Oct 05 14:03:46 MDT 2022] - INFO passoff.ServerTest: 	Setting up File Handler Default Test...
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Proxy: 	Clear called
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Post without Request Body called
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Attempting to open connection to server
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Connection opened to server
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Setting passoffrequest method to POST
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Request method set to POST
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Setting Do Output to true
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Do Output set to true
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Connecting to server
+[Wed Oct 05 14:03:46 MDT 2022] - INFO passoff.ServerTest: 	Setting up Realistic Fill Death Test...
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Proxy: 	Clear called
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Post without Request Body called
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Attempting to open connection to server
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Connection opened to server
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Setting passoffrequest method to POST
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Request method set to POST
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Setting Do Output to true
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Do Output set to true
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Connecting to server
+[Wed Oct 05 14:03:46 MDT 2022] - INFO passoff.ServerTest: 	Setting up Login Invalid User Test...
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Proxy: 	Clear called
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Post without Request Body called
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Attempting to open connection to server
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Connection opened to server
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Setting passoffrequest method to POST
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Request method set to POST
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Setting Do Output to true
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Do Output set to true
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Connecting to server
+[Wed Oct 05 14:03:46 MDT 2022] - INFO passoff.ServerTest: 	Setting up Load Valid Info Test...
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Proxy: 	Clear called
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Post without Request Body called
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Attempting to open connection to server
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Connection opened to server
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Setting passoffrequest method to POST
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Request method set to POST
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Setting Do Output to true
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Do Output set to true
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Connecting to server
+[Wed Oct 05 14:03:46 MDT 2022] - INFO passoff.ServerTest: 	Setting up Valid Fill Relationships Test...
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Proxy: 	Clear called
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Post without Request Body called
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Attempting to open connection to server
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Connection opened to server
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Setting passoffrequest method to POST
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Request method set to POST
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Setting Do Output to true
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Do Output set to true
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Connecting to server
+[Wed Oct 05 14:03:46 MDT 2022] - INFO passoff.ServerTest: 	Setting up Login Invalid Password Test...
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Proxy: 	Clear called
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Post without Request Body called
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Attempting to open connection to server
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Connection opened to server
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Setting passoffrequest method to POST
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Request method set to POST
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Setting Do Output to true
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Do Output set to true
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Connecting to server
+[Wed Oct 05 14:03:46 MDT 2022] - INFO passoff.ServerTest: 	Setting up Events Bad Auth Token Test...
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Proxy: 	Clear called
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Post without Request Body called
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Attempting to open connection to server
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Connection opened to server
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Setting passoffrequest method to POST
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Request method set to POST
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Setting Do Output to true
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Do Output set to true
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Connecting to server
+[Wed Oct 05 14:03:46 MDT 2022] - INFO passoff.ServerTest: 	Setting up Clear Test...
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Proxy: 	Clear called
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Post without Request Body called
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Attempting to open connection to server
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Connection opened to server
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Setting passoffrequest method to POST
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Request method set to POST
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Setting Do Output to true
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Do Output set to true
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Connecting to server
+[Wed Oct 05 14:03:46 MDT 2022] - INFO passoff.ServerTest: 	Setting up Event Bad Auth Token Test...
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Proxy: 	Clear called
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Post without Request Body called
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Attempting to open connection to server
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Connection opened to server
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Setting passoffrequest method to POST
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Request method set to POST
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Setting Do Output to true
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Do Output set to true
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Connecting to server
+[Wed Oct 05 14:03:46 MDT 2022] - INFO passoff.ServerTest: 	Setting up Realistic Fill Marriage Test...
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Proxy: 	Clear called
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Post without Request Body called
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Attempting to open connection to server
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Connection opened to server
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Setting passoffrequest method to POST
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Request method set to POST
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Setting Do Output to true
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Do Output set to true
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Connecting to server
+[Wed Oct 05 14:03:46 MDT 2022] - INFO passoff.ServerTest: 	Setting up Person Wrong User Test...
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Proxy: 	Clear called
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Post without Request Body called
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Attempting to open connection to server
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Connection opened to server
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Setting passoffrequest method to POST
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Request method set to POST
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Setting Do Output to true
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Do Output set to true
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Connecting to server
+[Wed Oct 05 14:03:46 MDT 2022] - INFO passoff.ServerTest: 	Setting up Person Bad Auth Token Test...
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Proxy: 	Clear called
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Post without Request Body called
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Attempting to open connection to server
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Connection opened to server
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Setting passoffrequest method to POST
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Request method set to POST
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Setting Do Output to true
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Do Output set to true
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Connecting to server
+[Wed Oct 05 14:03:46 MDT 2022] - INFO passoff.ServerTest: 	Setting up Event Valid Test...
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Proxy: 	Clear called
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Post without Request Body called
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Attempting to open connection to server
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Connection opened to server
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Setting passoffrequest method to POST
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Request method set to POST
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Setting Do Output to true
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Do Output set to true
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Connecting to server
+[Wed Oct 05 14:03:46 MDT 2022] - INFO passoff.ServerTest: 	Setting up Fill 2 Valid Test...
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Proxy: 	Clear called
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Post without Request Body called
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Attempting to open connection to server
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Connection opened to server
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Setting passoffrequest method to POST
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Request method set to POST
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Setting Do Output to true
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Do Output set to true
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Connecting to server
+[Wed Oct 05 14:03:46 MDT 2022] - INFO passoff.ServerTest: 	Setting up Fill 4 Valid Test...
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Proxy: 	Clear called
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Post without Request Body called
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Attempting to open connection to server
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Connection opened to server
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Setting passoffrequest method to POST
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Request method set to POST
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Setting Do Output to true
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Do Output set to true
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Connecting to server
+[Wed Oct 05 14:03:46 MDT 2022] - INFO passoff.ServerTest: 	Setting up Fill 5 Valid Test...
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Proxy: 	Clear called
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Post without Request Body called
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Attempting to open connection to server
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Connection opened to server
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Setting passoffrequest method to POST
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Request method set to POST
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Setting Do Output to true
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Do Output set to true
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Connecting to server
+[Wed Oct 05 14:03:46 MDT 2022] - INFO passoff.ServerTest: 	Setting up Persons Valid Test...
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Proxy: 	Clear called
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Post without Request Body called
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Attempting to open connection to server
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Connection opened to server
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Setting passoffrequest method to POST
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Request method set to POST
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Setting Do Output to true
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Do Output set to true
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Connecting to server
+[Wed Oct 05 14:03:46 MDT 2022] - INFO passoff.ServerTest: 	Setting up Load Valid Test...
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Proxy: 	Clear called
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Post without Request Body called
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Attempting to open connection to server
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Connection opened to server
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Setting passoffrequest method to POST
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Request method set to POST
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Setting Do Output to true
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Do Output set to true
+[Wed Oct 05 14:03:46 MDT 2022] - INFO client.Client: 	Connecting to server
+[Wed Oct 05 14:03:47 MDT 2022] - INFO passoff.ServerTest: 	Setting up Re-Register User Test...
+[Wed Oct 05 14:03:47 MDT 2022] - INFO client.Proxy: 	Clear called
+[Wed Oct 05 14:03:47 MDT 2022] - INFO client.Client: 	Post without Request Body called
+[Wed Oct 05 14:03:47 MDT 2022] - INFO client.Client: 	Attempting to open connection to server
+[Wed Oct 05 14:03:47 MDT 2022] - INFO client.Client: 	Connection opened to server
+[Wed Oct 05 14:03:47 MDT 2022] - INFO client.Client: 	Setting passoffrequest method to POST
+[Wed Oct 05 14:03:47 MDT 2022] - INFO client.Client: 	Request method set to POST
+[Wed Oct 05 14:03:47 MDT 2022] - INFO client.Client: 	Setting Do Output to true
+[Wed Oct 05 14:03:47 MDT 2022] - INFO client.Client: 	Do Output set to true
+[Wed Oct 05 14:03:47 MDT 2022] - INFO client.Client: 	Connecting to server
+[Wed Oct 05 14:03:47 MDT 2022] - INFO passoff.ServerTest: 	Setting up Event Wrong User Test...
+[Wed Oct 05 14:03:47 MDT 2022] - INFO client.Proxy: 	Clear called
+[Wed Oct 05 14:03:47 MDT 2022] - INFO client.Client: 	Post without Request Body called
+[Wed Oct 05 14:03:47 MDT 2022] - INFO client.Client: 	Attempting to open connection to server
+[Wed Oct 05 14:03:47 MDT 2022] - INFO client.Client: 	Connection opened to server
+[Wed Oct 05 14:03:47 MDT 2022] - INFO client.Client: 	Setting passoffrequest method to POST
+[Wed Oct 05 14:03:47 MDT 2022] - INFO client.Client: 	Request method set to POST
+[Wed Oct 05 14:03:47 MDT 2022] - INFO client.Client: 	Setting Do Output to true
+[Wed Oct 05 14:03:47 MDT 2022] - INFO client.Client: 	Do Output set to true
+[Wed Oct 05 14:03:47 MDT 2022] - INFO client.Client: 	Connecting to server
+[Wed Oct 05 14:03:47 MDT 2022] - INFO passoff.ServerTest: 	Setting up Realistic Fill Birth Test...
+[Wed Oct 05 14:03:47 MDT 2022] - INFO client.Proxy: 	Clear called
+[Wed Oct 05 14:03:47 MDT 2022] - INFO client.Client: 	Post without Request Body called
+[Wed Oct 05 14:03:47 MDT 2022] - INFO client.Client: 	Attempting to open connection to server
+[Wed Oct 05 14:03:47 MDT 2022] - INFO client.Client: 	Connection opened to server
+[Wed Oct 05 14:03:47 MDT 2022] - INFO client.Client: 	Setting passoffrequest method to POST
+[Wed Oct 05 14:03:47 MDT 2022] - INFO client.Client: 	Request method set to POST
+[Wed Oct 05 14:03:47 MDT 2022] - INFO client.Client: 	Setting Do Output to true
+[Wed Oct 05 14:03:47 MDT 2022] - INFO client.Client: 	Do Output set to true
+[Wed Oct 05 14:03:47 MDT 2022] - INFO client.Client: 	Connecting to server
+[Wed Oct 05 14:03:47 MDT 2022] - INFO passoff.ServerTest: 	Setting up Events Valid Test...
+[Wed Oct 05 14:03:47 MDT 2022] - INFO client.Proxy: 	Clear called
+[Wed Oct 05 14:03:47 MDT 2022] - INFO client.Client: 	Post without Request Body called
+[Wed Oct 05 14:03:47 MDT 2022] - INFO client.Client: 	Attempting to open connection to server
+[Wed Oct 05 14:03:47 MDT 2022] - INFO client.Client: 	Connection opened to server
+[Wed Oct 05 14:03:47 MDT 2022] - INFO client.Client: 	Setting passoffrequest method to POST
+[Wed Oct 05 14:03:47 MDT 2022] - INFO client.Client: 	Request method set to POST
+[Wed Oct 05 14:03:47 MDT 2022] - INFO client.Client: 	Setting Do Output to true
+[Wed Oct 05 14:03:47 MDT 2022] - INFO client.Client: 	Do Output set to true
+[Wed Oct 05 14:03:47 MDT 2022] - INFO client.Client: 	Connecting to server
+[Wed Oct 05 14:03:47 MDT 2022] - INFO passoff.ServerTest: 	Setting up Person Valid Test...
+[Wed Oct 05 14:03:47 MDT 2022] - INFO client.Proxy: 	Clear called
+[Wed Oct 05 14:03:47 MDT 2022] - INFO client.Client: 	Post without Request Body called
+[Wed Oct 05 14:03:47 MDT 2022] - INFO client.Client: 	Attempting to open connection to server
+[Wed Oct 05 14:03:47 MDT 2022] - INFO client.Client: 	Connection opened to server
+[Wed Oct 05 14:03:47 MDT 2022] - INFO client.Client: 	Setting passoffrequest method to POST
+[Wed Oct 05 14:03:47 MDT 2022] - INFO client.Client: 	Request method set to POST
+[Wed Oct 05 14:03:47 MDT 2022] - INFO client.Client: 	Setting Do Output to true
+[Wed Oct 05 14:03:47 MDT 2022] - INFO client.Client: 	Do Output set to true
+[Wed Oct 05 14:03:47 MDT 2022] - INFO client.Client: 	Connecting to server
+[Wed Oct 05 14:03:47 MDT 2022] - INFO passoff.ServerTest: 	Setting up Register Valid New User Test...
+[Wed Oct 05 14:03:47 MDT 2022] - INFO client.Proxy: 	Clear called
+[Wed Oct 05 14:03:47 MDT 2022] - INFO client.Client: 	Post without Request Body called
+[Wed Oct 05 14:03:47 MDT 2022] - INFO client.Client: 	Attempting to open connection to server
+[Wed Oct 05 14:03:47 MDT 2022] - INFO client.Client: 	Connection opened to server
+[Wed Oct 05 14:03:47 MDT 2022] - INFO client.Client: 	Setting passoffrequest method to POST
+[Wed Oct 05 14:03:47 MDT 2022] - INFO client.Client: 	Request method set to POST
+[Wed Oct 05 14:03:47 MDT 2022] - INFO client.Client: 	Setting Do Output to true
+[Wed Oct 05 14:03:47 MDT 2022] - INFO client.Client: 	Do Output set to true
+[Wed Oct 05 14:03:47 MDT 2022] - INFO client.Client: 	Connecting to server
+[Wed Oct 05 14:03:47 MDT 2022] - INFO passoff.ServerTest: 	Setting up File Handler 404 Test...
+[Wed Oct 05 14:03:47 MDT 2022] - INFO client.Proxy: 	Clear called
+[Wed Oct 05 14:03:47 MDT 2022] - INFO client.Client: 	Post without Request Body called
+[Wed Oct 05 14:03:47 MDT 2022] - INFO client.Client: 	Attempting to open connection to server
+[Wed Oct 05 14:03:47 MDT 2022] - INFO client.Client: 	Connection opened to server
+[Wed Oct 05 14:03:47 MDT 2022] - INFO client.Client: 	Setting passoffrequest method to POST
+[Wed Oct 05 14:03:47 MDT 2022] - INFO client.Client: 	Request method set to POST
+[Wed Oct 05 14:03:47 MDT 2022] - INFO client.Client: 	Setting Do Output to true
+[Wed Oct 05 14:03:47 MDT 2022] - INFO client.Client: 	Do Output set to true
+[Wed Oct 05 14:03:47 MDT 2022] - INFO client.Client: 	Connecting to server
+[Wed Oct 05 14:03:47 MDT 2022] - INFO passoff.ServerTest: 	Setting up File Handler Test...
+[Wed Oct 05 14:03:47 MDT 2022] - INFO client.Proxy: 	Clear called
+[Wed Oct 05 14:03:47 MDT 2022] - INFO client.Client: 	Post without Request Body called
+[Wed Oct 05 14:03:47 MDT 2022] - INFO client.Client: 	Attempting to open connection to server
+[Wed Oct 05 14:03:47 MDT 2022] - INFO client.Client: 	Connection opened to server
+[Wed Oct 05 14:03:47 MDT 2022] - INFO client.Client: 	Setting passoffrequest method to POST
+[Wed Oct 05 14:03:47 MDT 2022] - INFO client.Client: 	Request method set to POST
+[Wed Oct 05 14:03:47 MDT 2022] - INFO client.Client: 	Setting Do Output to true
+[Wed Oct 05 14:03:47 MDT 2022] - INFO client.Client: 	Do Output set to true
+[Wed Oct 05 14:03:47 MDT 2022] - INFO client.Client: 	Connecting to server
+[Wed Oct 05 14:03:47 MDT 2022] - INFO passoff.ServerTest: 	Setting up Persons Bad Auth Token Test...
+[Wed Oct 05 14:03:47 MDT 2022] - INFO client.Proxy: 	Clear called
+[Wed Oct 05 14:03:47 MDT 2022] - INFO client.Client: 	Post without Request Body called
+[Wed Oct 05 14:03:47 MDT 2022] - INFO client.Client: 	Attempting to open connection to server
+[Wed Oct 05 14:03:47 MDT 2022] - INFO client.Client: 	Connection opened to server
+[Wed Oct 05 14:03:47 MDT 2022] - INFO client.Client: 	Setting passoffrequest method to POST
+[Wed Oct 05 14:03:47 MDT 2022] - INFO client.Client: 	Request method set to POST
+[Wed Oct 05 14:03:47 MDT 2022] - INFO client.Client: 	Setting Do Output to true
+[Wed Oct 05 14:03:47 MDT 2022] - INFO client.Client: 	Do Output set to true
+[Wed Oct 05 14:03:47 MDT 2022] - INFO client.Client: 	Connecting to server
+[Wed Oct 05 14:03:47 MDT 2022] - INFO passoff.ServerTest: 	Setting up Fill Does Not Affect Other Users Test...
+[Wed Oct 05 14:03:47 MDT 2022] - INFO client.Proxy: 	Clear called
+[Wed Oct 05 14:03:47 MDT 2022] - INFO client.Client: 	Post without Request Body called
+[Wed Oct 05 14:03:47 MDT 2022] - INFO client.Client: 	Attempting to open connection to server
+[Wed Oct 05 14:03:47 MDT 2022] - INFO client.Client: 	Connection opened to server
+[Wed Oct 05 14:03:47 MDT 2022] - INFO client.Client: 	Setting passoffrequest method to POST
+[Wed Oct 05 14:03:47 MDT 2022] - INFO client.Client: 	Request method set to POST
+[Wed Oct 05 14:03:47 MDT 2022] - INFO client.Client: 	Setting Do Output to true
+[Wed Oct 05 14:03:47 MDT 2022] - INFO client.Client: 	Do Output set to true
+[Wed Oct 05 14:03:47 MDT 2022] - INFO client.Client: 	Connecting to server
+[Wed Oct 05 14:03:47 MDT 2022] - INFO passoff.ServerTest: 	Setting up Login Valid User Test...
+[Wed Oct 05 14:03:47 MDT 2022] - INFO client.Proxy: 	Clear called
+[Wed Oct 05 14:03:47 MDT 2022] - INFO client.Client: 	Post without Request Body called
+[Wed Oct 05 14:03:47 MDT 2022] - INFO client.Client: 	Attempting to open connection to server
+[Wed Oct 05 14:03:47 MDT 2022] - INFO client.Client: 	Connection opened to server
+[Wed Oct 05 14:03:47 MDT 2022] - INFO client.Client: 	Setting passoffrequest method to POST
+[Wed Oct 05 14:03:47 MDT 2022] - INFO client.Client: 	Request method set to POST
+[Wed Oct 05 14:03:47 MDT 2022] - INFO client.Client: 	Setting Do Output to true
+[Wed Oct 05 14:03:47 MDT 2022] - INFO client.Client: 	Do Output set to true
+[Wed Oct 05 14:03:47 MDT 2022] - INFO client.Client: 	Connecting to server
