@@ -1,6 +1,9 @@
 package services;
 
 import results.ClearResult;
+import util.ClearUtil;
+
+import java.sql.SQLException;
 
 /**
  * The service class for clearing the database
@@ -12,6 +15,15 @@ public class ClearService {
      * @return The status of the clear
      */
     public static ClearResult Clear() {
-        return null;
+        ClearResult result = new ClearResult();
+
+        try {
+            ClearUtil.ClearDatabase();
+        } catch (SQLException ex) {
+            result.setMessage(ex.getMessage());
+            result.setSuccess(false);
+        }
+
+        return result;
     }
 }

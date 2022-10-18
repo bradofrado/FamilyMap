@@ -1,9 +1,0 @@
-
-P
-java:S1118":Add a private constructor to hide the implicit public one.(¡Àþ²
-h	java:S100"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(€‡É¾øÿÿÿÿ
-I
-java:S1172".Remove this unused method parameter "request".(€‡É¾øÿÿÿÿ
-c	java:S100"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¶ì¯”
-D
-java:S1172".Remove this unused method parameter "request".(¶ì¯”

@@ -30,13 +30,13 @@ public class UserDao extends Dao {
 
     /**
      * Gets a user model object given the user's Id
-     * @param userId The id of the user to get
+     * @param username The username of the user to get
      * @return The wanted User model object
      */
-    public User GetUser(String userId) throws SQLException {
+    public User GetUser(String username) throws SQLException {
         List<User> users = new ArrayList<>();
         doTransaction((connection) -> {
-            users.add(getUser(connection, userId));
+            users.add(getUser(connection, username));
         });
 
         return users.get(0);

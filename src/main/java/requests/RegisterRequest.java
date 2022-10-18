@@ -12,6 +12,12 @@ public class RegisterRequest {
      * The password of the new user
      */
     private String password;
+
+    /**
+     * The email of the user
+     */
+    private String email;
+
     /**
      * The first name of the new user
      */
@@ -23,7 +29,7 @@ public class RegisterRequest {
     /**
      * The gender of the new user 'f' or 'm'
      */
-    private String gender;
+    private char gender;
 
     public String getUsername() {
         return username;
@@ -57,11 +63,19 @@ public class RegisterRequest {
         this.lastName=lastName;
     }
 
-    public String getGender() {
+    public char getGender() {
         return gender;
     }
 
-    public void setGender(String gender) {
+    public void setGender(char gender) {
         this.gender=gender;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email=email;
     }
 }

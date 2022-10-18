@@ -19,13 +19,13 @@ public class AuthTokenDao extends Dao {
 
     /**
      * Gets the auth token of the specified username
-     * @param username The user of the wanted auth token
+     * @param token The user of the wanted auth token
      * @return The auth token model object
      */
-    public AuthToken GetAuthToken(String username) throws SQLException {
+    public AuthToken getAuthToken(String token) throws SQLException {
         List<AuthToken> tokens = new ArrayList<>();
         doTransaction((connection) -> {
-            tokens.add(getToken(connection, username));
+            tokens.add(getToken(connection, token));
         });
 
         return tokens.size() > 0 ? tokens.get(0) : null;
@@ -66,11 +66,11 @@ public class AuthTokenDao extends Dao {
         }
     }
 
-    private AuthToken getToken(Connection connection, String username) throws SQLException {
-        String sql = "select authtoken, username from AuthToken where username = ?";
+    private AuthToken getToken(Connection connection, String authtoken) throws SQLException {
+        String sql = "select authtoken, username from AuthToken where authtoken = ?";
 
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
-            stmt.setString(1, username);
+            stmt.setString(1, authtoken);
 
             ResultSet set = stmt.executeQuery();
             if (set.next()) {

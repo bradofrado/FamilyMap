@@ -25,4 +25,8 @@ public class Result {
     public void setSuccess(boolean success) {
         this.success=success;
     }
+
+    public void Result() {
+        success = true;
+    }
 }
