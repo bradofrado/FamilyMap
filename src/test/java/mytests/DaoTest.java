@@ -1,8 +1,10 @@
 package mytests;
 
+import dao.AuthTokenDao;
 import dao.EventDao;
 import dao.PersonDao;
 import dao.UserDao;
+import models.AuthToken;
 import models.Event;
 import models.Person;
 import models.User;
@@ -231,6 +233,81 @@ public class DaoTest {
                 personDao.DeleteAll();
 
                 assertNull(personDao.GetPerson(person.getPersonID(), person.getAssociatedUsername()));
+            } catch (SQLException ex) {
+                fail(ex.getMessage());
+            }
+        }
+    }
+
+    @Nested
+    @DisplayName("AuthTokenDao Operations")
+    class token {
+        AuthToken token;
+        AuthTokenDao tokenDao;
+        @BeforeEach
+        public void startup() {
+            token = new AuthToken("asdf", "bradofrado");
+
+            tokenDao = new AuthTokenDao();
+            tokenDao.startTransaction();
+        }
+
+        @AfterEach
+        public void cleanup() {
+            tokenDao.endTransaction();
+        }
+
+        @Test
+        public void TestAddAuthToken() {
+            try {
+                tokenDao.AddAuthToken(token);
+            } catch (SQLException ex) {
+                fail(ex.getMessage());
+            }
+        }
+
+        @Test
+        public void TestAddAuthTokenFail() {
+            try {
+                tokenDao.AddAuthToken(token);
+            } catch (SQLException ex) {
+                fail(ex.getMessage());
+            }
+            assertThrows(SQLException.class, () -> {
+                tokenDao.AddAuthToken(token);
+            });
+        }
+
+        @Test
+        public void TestGetAuthToken() {
+            try {
+                tokenDao.AddAuthToken(token);
+                AuthToken findAuthToken=tokenDao.GetAuthToken(token.getUsername());
+
+                assertEquals(token, findAuthToken);
+            } catch (SQLException ex) {
+                fail(ex.getMessage());
+            }
+        }
+
+        @Test
+        public void TestGetAuthTokenFail() {
+            try {
+                tokenDao.AddAuthToken(token);
+                AuthToken findAuthToken=tokenDao.GetAuthToken(token.getAuthtoken());
+                assertNotEquals(token, findAuthToken);
+            } catch (SQLException ex) {
+                fail(ex.getMessage());
+            }
+        }
+
+        @Test
+        public void TestAuthTokenClear() {
+            try {
+                tokenDao.AddAuthToken(token);
+                tokenDao.DeleteAll();
+
+                assertNull(tokenDao.GetAuthToken(token.getUsername()));
             } catch (SQLException ex) {
                 fail(ex.getMessage());
             }

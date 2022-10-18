@@ -1,12 +1,6 @@
 
-X
-(src/main/java/services/ClearService.java,c\e\ce7911a8083206a6e867cc5fb33256f514521ecd
 Y
 )src/main/java/services/PersonService.java,2\f\2fa405d3c8e444cb2acc86c47dda04113dd79629
-[
-+src/main/java/services/RegisterService.java,2\9\29dfba84a32910dc32afd4de5583bd3cda4db6b5
-S
-#src/main/java/models/AuthToken.java,4\2\42025ec75dfb4bcb150cbc26ebda1925699db340
 X
 (src/main/java/requests/EventRequest.java,8\1\81a9ed69e5a098975e65a62639a3746373216a1e
 Y
