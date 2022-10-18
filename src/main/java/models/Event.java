@@ -1,5 +1,7 @@
 package models;
 
+import java.util.Objects;
+
 /**
  * The event model for event data
  */
@@ -41,6 +43,18 @@ public class Event {
      * The year of the event
      */
     private int year;
+
+    public Event(String eventID, String associatedUsername, String personID, float latitude, float longtude, String country, String city, String eventType, int year) {
+        this.eventID = eventID;
+        this.associatedUsername = associatedUsername;
+        this.personID = personID;
+        this.latitude = latitude;
+        this.longitude = longtude;
+        this.country = country;
+        this.city = city;
+        this.eventType = eventType;
+        this.year = year;
+    }
 
     public String getEventID() {
         return eventID;
@@ -112,5 +126,26 @@ public class Event {
 
     public void setYear(int year) {
         this.year=year;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Event event=(Event) o;
+        return Float.compare(event.latitude, latitude) == 0 &&
+                Float.compare(event.longitude, longitude) == 0 &&
+                year == event.year &&
+                Objects.equals(eventID, event.eventID) &&
+                Objects.equals(associatedUsername, event.associatedUsername) &&
+                Objects.equals(personID, event.personID) &&
+                Objects.equals(country, event.country) &&
+                Objects.equals(city, event.city) &&
+                Objects.equals(eventType, event.eventType);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(eventID, associatedUsername, personID, latitude, longitude, country, city, eventType, year);
     }
 }

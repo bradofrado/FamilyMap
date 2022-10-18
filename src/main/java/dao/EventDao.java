@@ -41,10 +41,10 @@ public class EventDao extends Dao {
     public Event GetEvent(String eventID, String username) throws SQLException {
         List<Event> events = new ArrayList<>();
         doTransaction((connection) -> {
-            events.add(getEvents(connection, eventID, username).get(0));
+            events.addAll(getEvents(connection, username, eventID));
         });
 
-        return events.get(0);
+        return events.size() > 0 ? events.get(0) : null;
     }
 
     /**
@@ -82,11 +82,11 @@ public class EventDao extends Dao {
     }
 
     private void insertEvents(Connection connection, List<Event> events) throws SQLException {
-        String sql="insert into event (personID, associatedUsername, personID, latitude, longitude, country, city, eventType, year) values (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql="insert into event (eventID, associatedUsername, personID, latitude, longitude, country, city, eventType, year) values (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (PreparedStatement stmt=connection.prepareStatement(sql)) {
             for (Event event : events) {
-                stmt.setString(1, event.getPersonID());
+                stmt.setString(1, event.getEventID());
                 stmt.setString(2, event.getAssociatedUsername());
                 stmt.setString(3, event.getPersonID());
                 stmt.setFloat(4, event.getLatitude());
@@ -106,8 +106,8 @@ public class EventDao extends Dao {
     }
 
     private List<Event> getEvents(Connection connection, String username, String eventID) throws SQLException {
-        String sql="select personID, associatedUsername, personID, latitude, longitude, country, city, eventType, year from person where username = ?";
-        if (eventID != null) sql += " and where eventID = ?";
+        String sql="select eventID, associatedUsername, personID, latitude, longitude, country, city, eventType, year from event where associatedUsername = ?";
+        if (eventID != null) sql += " and eventID = ?";
 
         try (PreparedStatement stmt=connection.prepareStatement(sql)) {
             stmt.setString(1, username);
@@ -118,16 +118,7 @@ public class EventDao extends Dao {
             ResultSet rs = stmt.executeQuery();
             List<Event> events = new ArrayList<>();
             while (rs.next()) {
-                Event event = new Event();
-                event.setPersonID(rs.getString(1));
-                event.setAssociatedUsername(rs.getString(2));
-                event.setPersonID(rs.getString(3));
-                event.setLatitude(rs.getFloat(4));
-                event.setLongitude(rs.getFloat(5));
-                event.setCountry(rs.getString(6));
-                event.setCity(rs.getString(7));
-                event.setEventType(rs.getString(8));
-                event.setYear(rs.getInt(9));
+                Event event = new Event(rs.getString(1), rs.getString(2), rs.getString(3), rs.getFloat(4), rs.getFloat(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getInt(9));
 
                 events.add(event);
             }

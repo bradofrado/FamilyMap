@@ -74,21 +74,14 @@ public class UserDao extends Dao {
     }
 
     private User getUser(Connection connection, String userId) throws SQLException {
-        String sql="select username, password, email, firstname, lastname, gender, personID from user where personID = ?";
+        String sql="select username, password, email, firstname, lastname, gender, personID from user where username = ?";
 
         try (PreparedStatement stmt=connection.prepareStatement(sql)) {
             stmt.setString(1, userId);
             ResultSet rs = stmt.executeQuery();
             User user = null;
             if (rs.next()) {
-                user = new User();
-                user.setUsername(rs.getString(1));
-                user.setPassword(rs.getString(2));
-                user.setEmail(rs.getString(3));
-                user.setFirstName(rs.getString(4));
-                user.setLastName(rs.getString(5));
-                user.setGender(rs.getString(6).charAt(0));
-                user.setPersonID(rs.getString(7));
+                user = new User(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6).charAt(0), rs.getString(7));
             }
 
             return user;

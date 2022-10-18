@@ -4,7 +4,7 @@ DROP TABLE IF EXISTS Event;
 DROP TABLE IF EXISTS AuthToken;
 
 CREATE TABLE User (
-	[username] VARCHAR(100) NOT NULL,
+	[username] VARCHAR(100) NOT NULL PRIMARY KEY,
 	[password] VARCHAR(100) NOT NULL,
 	[email] VARCHAR(100) NOT NULL,
 	[firstName] VARCHAR(100) NOT NULL,
@@ -13,7 +13,7 @@ CREATE TABLE User (
 	[personID] VARCHAR(100) NOT NULL);
 
 CREATE TABLE Person (
-	[personID] VARCHAR(100) NOT NULL,
+	[personID] VARCHAR(100) NOT NULL PRIMARY KEY,
 	[associatedUsername] VARCHAR(100) NOT NULL,
 	[firstName] VARCHAR(100) NOT NULL,
 	[lastName] VARCHAR(100) NOT NULL,
@@ -23,7 +23,7 @@ CREATE TABLE Person (
 	[spouseID] VARCHAR(100));
 
 CREATE TABLE Event (
-    [eventID] VARCHAR(100) NOT NULL,
+    [eventID] VARCHAR(100) NOT NULL PRIMARY KEY,
     [associatedUsername] VARCHAR(100) NOT NULL,
     [personID] VARCHAR(100) NOT NULL,
     [latitude] FLOAT NOT NULL,
@@ -34,5 +34,5 @@ CREATE TABLE Event (
     [year] INT NOT NULL);
 
 CREATE TABLE AuthToken (
-    [authtoken] VARCHAR(100) NOT NULL,
+    [authtoken] VARCHAR(100) NOT NULL PRIMARY KEY,
     [username] VARCHAR(100) NOT NULL);

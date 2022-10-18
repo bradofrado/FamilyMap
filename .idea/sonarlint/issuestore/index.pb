@@ -7,8 +7,6 @@ Y
 +src/main/java/services/RegisterService.java,2\9\29dfba84a32910dc32afd4de5583bd3cda4db6b5
 S
 #src/main/java/models/AuthToken.java,4\2\42025ec75dfb4bcb150cbc26ebda1925699db340
-N
-src/main/java/models/User.java,f\7\f7010c4f46d3b9dd8d59899249df5ba3ee23f96b
 X
 (src/main/java/requests/EventRequest.java,8\1\81a9ed69e5a098975e65a62639a3746373216a1e
 Y

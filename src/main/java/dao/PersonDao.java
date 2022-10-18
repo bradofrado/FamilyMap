@@ -40,10 +40,10 @@ public class PersonDao extends Dao {
     public Person GetPerson(String personID, String username) throws SQLException {
         List<Person> persons = new ArrayList<>();
         doTransaction((connection) -> {
-            persons.add(getPersons(connection, username, personID).get(0));
+            persons.addAll(getPersons(connection, username, personID));
         });
 
-        return persons.get(0);
+        return persons.size() > 0 ? persons.get(0) : null;
     }
 
     /**
@@ -103,7 +103,7 @@ public class PersonDao extends Dao {
     }
 
     private List<Person> getPersons(Connection connection, String username, String personId) throws SQLException {
-        String sql="select personID, associatedUsername, firstname, lastname, gender, fatherID, motherID, spouseID from person where username = ?";
+        String sql="select personID, associatedUsername, firstname, lastname, gender, fatherID, motherID, spouseID from person where associatedUsername = ?";
         if (personId != null) sql += " and personID = ?";
 
         try (PreparedStatement stmt=connection.prepareStatement(sql)) {
@@ -114,15 +114,10 @@ public class PersonDao extends Dao {
             ResultSet rs = stmt.executeQuery();
             List<Person> persons = new ArrayList<>();
             while (rs.next()) {
-                Person person = new Person();
-                person.setPersonID(rs.getString(1));
-                person.setAssociatedUsername(rs.getString(2));
-                person.setFirstName(rs.getString(3));
-                person.setLastName(rs.getString(4));
-                person.setGender(rs.getString(5).charAt(0));
+                Person person = new Person(rs.getString(1), rs.getString(2), rs.getString(3),rs.getString(4), rs.getString(5).charAt(0));
                 person.setFatherID(rs.getString(6));
                 person.setMotherID(rs.getString(7));
-                person.setSpouseID(rs.getString(7));
+                person.setSpouseID(rs.getString(8));
 
                 persons.add(person);
             }
