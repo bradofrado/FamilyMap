@@ -282,7 +282,7 @@ public class DaoTest {
         public void TestGetAuthToken() {
             try {
                 tokenDao.AddAuthToken(token);
-                AuthToken findAuthToken=tokenDao.getAuthToken(token.getUsername());
+                AuthToken findAuthToken=tokenDao.getAuthToken(token.getAuthtoken());
 
                 assertEquals(token, findAuthToken);
             } catch (SQLException ex) {
@@ -294,7 +294,7 @@ public class DaoTest {
         public void TestGetAuthTokenFail() {
             try {
                 tokenDao.AddAuthToken(token);
-                AuthToken findAuthToken=tokenDao.getAuthToken(token.getAuthtoken());
+                AuthToken findAuthToken=tokenDao.getAuthToken(token.getUsername());
                 assertNotEquals(token, findAuthToken);
             } catch (SQLException ex) {
                 fail(ex.getMessage());
