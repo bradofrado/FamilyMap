@@ -20,7 +20,18 @@ public class UserUtil {
      * @throws SQLException
      */
     public static String LoginUser(String username, String password) throws SQLException, InvalidCredentialsException {
-        return "";
+        User user = new UserDao().GetUser(username);
+        if (user == null) {
+            throw new InvalidCredentialsException();
+        }
+
+        if (!user.getPassword().equals(password)){
+            throw new InvalidCredentialsException();
+        }
+
+        new AuthTokenDao().AddAuthToken(new AuthToken("abc", user.getUsername()));
+
+        return "abc";
     }
 
     /**

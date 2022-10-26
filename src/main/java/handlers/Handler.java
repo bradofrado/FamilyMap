@@ -13,6 +13,9 @@ public abstract class Handler implements HttpHandler {
     private Map<String, HandlerMethod> routes = new HashMap<>();
     private HttpExchange exchange;
 
+    /**
+     * Here any child class will define methods for different routes
+     */
     protected abstract void initRoutes();
 
     public Handler() {
@@ -20,6 +23,11 @@ public abstract class Handler implements HttpHandler {
     }
 
 
+    /**
+     * Handles the exchange
+     * @param exchange
+     * @throws IOException
+     */
     @Override
     public void handle(HttpExchange exchange) throws IOException {
         try {
@@ -27,6 +35,7 @@ public abstract class Handler implements HttpHandler {
             String path=exchange.getRequestURI().getPath();
             String method=exchange.getRequestMethod().toLowerCase();
 
+            //Gets the method for the given http verb and path. Defaults to /
             String key=getKey(method, path);
             if (!routes.containsKey(key)) {
                 key = getKey(method, "/");
@@ -36,9 +45,11 @@ public abstract class Handler implements HttpHandler {
                 }
             }
 
+            //Get the authorization token
             Headers header=exchange.getRequestHeaders();
             String authToken=header.containsKey("Authorization") ? header.getFirst("Authorization") : null;
 
+            //Create the request object
             HandlerMethod handlerMethod=routes.get(key);
             String body = readString(exchange.getRequestBody());
             Request request=new Request(path, authToken, body);
@@ -50,6 +61,12 @@ public abstract class Handler implements HttpHandler {
         }
     }
 
+    /**
+     * Sends back a message with a code to the client
+     * @param rCord
+     * @param message
+     * @throws IOException
+     */
     protected void send(int rCord, String message) throws IOException {
         this.exchange.sendResponseHeaders(rCord, 0);
 
@@ -58,6 +75,12 @@ public abstract class Handler implements HttpHandler {
         responseBody.close();
     }
 
+    /**
+     * Sends back a file and a code to the client
+     * @param rCode
+     * @param file
+     * @throws IOException
+     */
     protected void sendFile(int rCode, File file) throws IOException {
         this.exchange.sendResponseHeaders(rCode, 0);
 
@@ -67,15 +90,30 @@ public abstract class Handler implements HttpHandler {
         responseBody.close();
     }
 
+    /**
+     * Sends back just a code to the client
+     * @param rCord
+     * @throws IOException
+     */
     protected void sendStatus(int rCord) throws IOException {
         this.exchange.sendResponseHeaders(rCord, 0);
         this.exchange.getResponseBody().close();
     }
 
+    /**
+     * Registers a get method for a certain path
+     * @param path The path to register
+     * @param method The method to call when this path is sent
+     */
     protected void get(String path, HandlerMethod method) {
         addPath("get", path, method);
     }
 
+    /**
+     * Registers a post method for a given path
+     * @param path The path to register
+     * @param method The method to call when this path is sent
+     */
     protected void post(String path, HandlerMethod method) {
         addPath("post", path, method);
     }

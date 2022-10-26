@@ -8,7 +8,7 @@ public class Result {
     /**
      * Whether or not the request was successful or an error
      */
-    private boolean success;
+    private boolean success = true;
 
     public String getMessage() {
         return message;

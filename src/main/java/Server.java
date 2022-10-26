@@ -1,6 +1,7 @@
 import java.io.*;
 import java.net.*;
 import com.sun.net.httpserver.*;
+import handlers.EventHandler;
 import handlers.FileHandler;
 import handlers.RegisterHandler;
 
@@ -42,6 +43,7 @@ public class Server {
         //server.createContext("/routes/claim", new ClaimRouteHandler());
 
         server.createContext("/user/register", new RegisterHandler());
+        server.createContext("/event", new EventHandler());
 
         // Create and install the "default" (or "file") HTTP handler.
         // All requests that do not match the other handler URLs
