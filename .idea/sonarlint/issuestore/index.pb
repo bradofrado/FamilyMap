@@ -11,3 +11,46 @@ U
 %src/main/java/results/LoadResult.java,d\f\df46df082b79a1da612d8c7594afecdd68c512fa
 W
 'src/main/java/results/PersonResult.java,d\0\d00514d5152d4eced47c0396c27238072b1896fd
+O
+src/main/java/models/Event.java,0\e\0e0ff2530602da9ee2c2e465a0ec3376cdef0401
+P
+ src/main/java/models/Person.java,4\7\479de81afd9a8cc58e5275bb43b6459a4e7d8f3b
+P
+ src/main/java/dao/PersonDao.java,9\e\9e9015a035bfa8d6df12d336b88d35c18c5f1edd
+J
+src/main/java/dao/Dao.java,3\1\3131dc201ddbe6c0c3ea9ad83866507be958fab3
+G
+db/CreateStatements.sql,f\5\f5e1a7180922a3ffab70af76774d4fdae2e742cd
+O
+src/main/java/dao/EventDao.java,8\4\843b333df8c3fb3115a5eac733e8f700ba655fd3
+S
+#src/main/java/models/AuthToken.java,4\2\42025ec75dfb4bcb150cbc26ebda1925699db340
+:
+
+.gitignore,a\5\a5cc2925ca8258af241be7e5b0381edf30266302
+V
+&src/main/java/results/ClearResult.java,7\9\79cad940c04e6a04dfe108cd47159698882813e8
+Q
+!src/main/java/results/Result.java,e\0\e0ff719292cb94f8235d80ac3d1e1b48e9dc8c41
+W
+'src/main/java/requests/LoadRequest.java,9\3\936c562201c8e155154b5ad1a32d89b7f8c64b14
+Q
+!src/main/java/util/ClearUtil.java,f\9\f9b155e3bdcf2589c9dcba7f0eaf4795d054851a
+N
+src/main/java/models/User.java,f\7\f7010c4f46d3b9dd8d59899249df5ba3ee23f96b
+[
++src/main/java/requests/RegisterRequest.java,d\5\d5a94f5cd1afffee807217972e43e72fb5662aae
+V
+&src/main/java/results/LoginResult.java,5\6\56adb8df9e905a53c489c282698af7e82999fee1
+i
+9src/main/java/exceptions/InvalidCredentialsException.java,d\4\d45821a15d9e674fe987ee1e8f69c4e503412f00
+V
+&src/main/java/results/EventResult.java,a\0\a0932ff066a836a6ebf6b0fb6dc9faec734c8f3f
+X
+(src/main/java/requests/EventRequest.java,8\1\81a9ed69e5a098975e65a62639a3746373216a1e
+Y
+)src/main/java/requests/EventsRequest.java,2\c\2c6c4f8922318e0aba74fe8eb87b5a16eae4fb06
+Y
+)src/main/java/requests/PersonRequest.java,a\2\a2684fe7432767ab69e0169a92580cb92243fe61
+Z
+*src/main/java/requests/PersonsRequest.java,f\9\f93f6242292eef22711c462848da57df654d7b63
