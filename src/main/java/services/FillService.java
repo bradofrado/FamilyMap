@@ -1,8 +1,12 @@
 package services;
 
+import dao.UserDao;
+import models.User;
 import requests.FillRequest;
 import results.FillResult;
+import util.ClearUtil;
 import util.PopulationGenerator;
+import util.UserUtil;
 
 import java.sql.SQLException;
 
@@ -18,7 +22,10 @@ public class FillService {
     public static FillResult Fill(FillRequest request) {
         FillResult result = new FillResult();
         try {
-            PopulationGenerator.populateGenerations(request.getUsername(), request.getGenerations());
+            User user = new UserDao().GetUser(request.getUsername());
+            ClearUtil.ClearForUser(request.getUsername());
+
+            PopulationGenerator.populateGenerations(user, request.getGenerations());
         } catch(SQLException ex) {
             result.setMessage(ex.getMessage());
             result.setSuccess(false);

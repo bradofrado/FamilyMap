@@ -25,8 +25,8 @@ public class RegisterService {
         User newUser = new User(request.getUsername(), request.getPassword(), request.getEmail(), request.getFirstName(), request.getLastName(), request.getGender(), "");
 
         try {
+            PopulationGenerator.populateGenerations(newUser, 4);
             new UserDao().AddUser(newUser);
-            PopulationGenerator.populateGenerations(newUser.getUsername(), 4);
             String token = UserUtil.LoginUser(newUser.getUsername(), newUser.getPassword());
 
             result.setAuthtoken(token);

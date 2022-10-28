@@ -21,4 +21,13 @@ public class ClearUtil {
         new EventDao().DeleteAll();
         new AuthTokenDao().DeleteAll();
     }
+
+    /**
+     * Clears all of the data for the associated username
+     * @param username The username of the user to clear data for
+     */
+    public static void ClearForUser(String username) throws SQLException {
+        new PersonDao().DeleteAll(username);
+        new EventDao().DeleteAll(username);
+    }
 }

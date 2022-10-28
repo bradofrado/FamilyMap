@@ -1,8 +1,6 @@
 
 W
 'src/main/java/requests/FillRequest.java,2\f\2fbb3d54be3102205e7182990ee99a8b7a458af8
-X
-(src/main/java/requests/LoginRequest.java,6\0\60d1df3e65dce36ebf3d475aefc0fd1490dc3b55
 W
 'src/main/java/results/EventsResult.java,3\f\3f4bf5e482753c754c41c7e1d123480c99590d9e
 U
@@ -11,8 +9,6 @@ U
 %src/main/java/results/LoadResult.java,d\f\df46df082b79a1da612d8c7594afecdd68c512fa
 W
 'src/main/java/results/PersonResult.java,d\0\d00514d5152d4eced47c0396c27238072b1896fd
-O
-src/main/java/models/Event.java,0\e\0e0ff2530602da9ee2c2e465a0ec3376cdef0401
 P
  src/main/java/models/Person.java,4\7\479de81afd9a8cc58e5275bb43b6459a4e7d8f3b
 P
@@ -26,8 +22,6 @@ S
 .gitignore,a\5\a5cc2925ca8258af241be7e5b0381edf30266302
 W
 'src/main/java/requests/LoadRequest.java,9\3\936c562201c8e155154b5ad1a32d89b7f8c64b14
-Q
-!src/main/java/util/ClearUtil.java,f\9\f9b155e3bdcf2589c9dcba7f0eaf4795d054851a
 N
 src/main/java/models/User.java,f\7\f7010c4f46d3b9dd8d59899249df5ba3ee23f96b
 V

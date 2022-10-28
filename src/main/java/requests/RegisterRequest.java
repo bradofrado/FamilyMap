@@ -1,5 +1,7 @@
 package requests;
 
+import models.User;
+
 /**
  * The request for the /user/register api call
  */
@@ -30,6 +32,16 @@ public class RegisterRequest {
      * The gender of the new user 'f' or 'm'
      */
     private char gender;
+
+    public RegisterRequest() {}
+    public RegisterRequest(User user) {
+        username = user.getUsername();
+        password = user.getPassword();
+        firstName = user.getFirstName();
+        lastName = user.getLastName();
+        gender = user.getGender();
+        email = user.getEmail();
+    }
 
     public String getUsername() {
         return username;

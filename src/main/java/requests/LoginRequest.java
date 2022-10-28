@@ -1,5 +1,7 @@
 package requests;
 
+import models.User;
+
 /**
  * The request object for the /user/login api call
  */
@@ -12,6 +14,13 @@ public class LoginRequest {
      * The password to login
      */
     private String password;
+
+    public LoginRequest() {}
+
+    public LoginRequest(User user) {
+        username = user.getUsername();
+        password = user.getPassword();
+    }
 
     public String getUsername() {
         return username;
