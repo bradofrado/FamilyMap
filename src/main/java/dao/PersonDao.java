@@ -128,7 +128,7 @@ public class PersonDao extends Dao {
 
     private void deletePersons(Connection connection, String username) throws SQLException {
         String sql = "delete from person";
-        if (username != null) sql += " where username = ?";
+        if (username != null) sql += " where associatedUsername = ?";
 
         try(PreparedStatement stmt = connection.prepareStatement(sql)) {
             if (username != null) {
@@ -142,7 +142,7 @@ public class PersonDao extends Dao {
 //                resetSequenceStatement.executeUpdate();
 //            }
 
-            System.out.printf("Deleted %d books\n", count);
+            System.out.printf("Deleted %d persons\n", count);
         }
     }
 }

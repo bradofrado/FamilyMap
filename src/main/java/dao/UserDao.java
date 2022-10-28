@@ -42,6 +42,12 @@ public class UserDao extends Dao {
         return users.get(0);
     }
 
+    public void UpdateUser(User user) throws SQLException {
+        doTransaction((connection) -> {
+            updateUser(connection, user);
+        });
+    }
+
     /**
      * Deletes all auth token data from the database
      */
@@ -69,6 +75,26 @@ public class UserDao extends Dao {
                 } else {
                     System.out.println("Failed to insert person");
                 }
+            }
+        }
+    }
+
+    private void updateUser(Connection connection, User user) throws SQLException {
+        String sql = "update user set password = ?, email = ?, firstName = ?, lastName = ?, gender = ?, personID = ? where username = ?";
+
+        try (PreparedStatement stmt= connection.prepareStatement(sql)) {
+            stmt.setString(1, user.getPassword());
+            stmt.setString(2, user.getEmail());
+            stmt.setString(3, user.getFirstName());
+            stmt.setString(4, user.getLastName());
+            stmt.setString(5, user.getGender() + "");
+            stmt.setString(6, user.getPersonID());
+            stmt.setString(7, user.getUsername());
+
+            if (stmt.executeUpdate() == 1) {
+                System.out.println("Updated user " + user);
+            } else {
+                System.out.println("Failed to update person");
             }
         }
     }

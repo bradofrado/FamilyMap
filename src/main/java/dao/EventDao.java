@@ -129,7 +129,7 @@ public class EventDao extends Dao {
 
     private void deleteEvents(Connection connection, String username) throws SQLException {
         String sql = "delete from event";
-        if (username != null) sql += " where username = ?";
+        if (username != null) sql += " where associatedUsername = ?";
 
         try(PreparedStatement stmt = connection.prepareStatement(sql)) {
             if (username != null) {

@@ -88,6 +88,39 @@ public class DaoTest {
                 fail(ex.getMessage());
             }
         }
+
+        @Test
+        public void TestUserUpdate() {
+            try {
+                String differentPersonId = "This is a different person id";
+                userDao.AddUser(user);
+                user.setPersonID(differentPersonId);
+                userDao.UpdateUser(user);
+
+                User updatedUser = userDao.GetUser(user.getUsername());
+                assertEquals(differentPersonId, updatedUser.getPersonID());
+            } catch (SQLException ex) {
+                fail(ex.getMessage());
+            }
+        }
+
+        @Test
+        public void TestUserUpdateFail() {
+            try {
+                String differentPersonId = "This is a different person id";
+                String username = user.getUsername();
+
+                userDao.AddUser(user);
+                user.setPersonID(differentPersonId);
+                user.setUsername("garbade");
+                userDao.UpdateUser(user);
+                User updatedUser = userDao.GetUser(username);
+
+                assertNotEquals(differentPersonId, updatedUser.getPersonID());
+            } catch (SQLException ex) {
+                fail(ex.getMessage());
+            }
+        }
     }
 
     @Nested

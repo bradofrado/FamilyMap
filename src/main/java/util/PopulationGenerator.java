@@ -2,24 +2,30 @@ package util;
 
 import dao.EventDao;
 import dao.PersonDao;
+import dao.UserDao;
 import models.Event;
 import models.Person;
 import models.User;
 
 import java.sql.SQLException;
+import java.time.LocalDate;
 
 /**
  * Util class for populating generations
  */
 public class PopulationGenerator {
+    private static final int GENERATION_GAP = 25;
+
+
     /**
      * Populates the given amount of generations for the given user
      * @param user The user to populate
      * @param generations The number of generations to generate
      */
     public static void populateGenerations(User user, int generations) throws SQLException {
-        Person person = generatePerson(user.getUsername(), user.getGender(), generations, user.getFirstName(), user.getLastName());
+        Person person = generatePerson(user.getUsername(), user.getGender(), generations, user.getFirstName(), user.getLastName(), LocalDate.now().getYear() - GENERATION_GAP);
         user.setPersonID(person.getPersonID());
+        new UserDao().UpdateUser(user);
     }
 
     /**
@@ -32,22 +38,28 @@ public class PopulationGenerator {
      * @return The generated Person
      * @throws SQLException
      */
-    private static Person generatePerson(String username, char gender, int generations, String firstname, String lastname) throws SQLException {
+    private static Person generatePerson(String username, char gender, int generations, String firstname, String lastname, int year) throws SQLException {
         Person mother = null;
         Person father = null;
 
-        if (generations > 1) {
-            mother = generatePerson(username, 'f', generations - 1, null, null);
-            father = generatePerson(username, 'm', generations - 1, null, null);
+        if (generations > 0) {
+            mother = generatePerson(username, 'f', generations - 1, null, null, year - GENERATION_GAP);
+            father = generatePerson(username, 'm', generations - 1, null, null, year - GENERATION_GAP);
 
             mother.setSpouseID(father.getPersonID());
             father.setSpouseID(mother.getPersonID());
 
-            Event fatherMarriage = DataGenerator.getRandomEvent(username, "marriage", father.getPersonID(), 0, 2020);
+            //Create and save marriage event
+            Event fatherMarriage = DataGenerator.getRandomEvent(username, "marriage", father.getPersonID(), year - 5, year + 5);
             Event motherMarriage = new Event(fatherMarriage, DataGenerator.getRandomId(), mother.getPersonID());
-
             saveEvent(fatherMarriage);
             saveEvent(motherMarriage);
+
+            //Create and save death event
+            Event fatherDeath = DataGenerator.getRandomEvent(username, "death", father.getPersonID(), year + 5, year + 10);
+            Event motherDeath = DataGenerator.getRandomEvent(username, "death", mother.getPersonID(), year + 5, year + 10);
+            saveEvent(fatherDeath);
+            saveEvent(motherDeath);
         }
 
         Person person;
@@ -60,17 +72,17 @@ public class PopulationGenerator {
         }
 
         if (mother != null) {
-            person.setMotherID(mother.getMotherID());
+            person.setMotherID(mother.getPersonID());
         }
 
         if (father != null) {
-            person.setFatherID(father.getFatherID());
+            person.setFatherID(father.getPersonID());
             person.setLastName(father.getLastName());
         }
 
         savePerson(person);
 
-        Event birth = DataGenerator.getRandomEvent(username, "birth", person.getPersonID(), 0, 2020);
+        Event birth = DataGenerator.getRandomEvent(username, "birth", person.getPersonID(), year - 10, year);
         saveEvent(birth);
 
         return person;

@@ -4,7 +4,7 @@ public class Result {
     /**
      * The result message either successful or error message
      */
-    private String message;
+    private String message = "";
     /**
      * Whether or not the request was successful or an error
      */
