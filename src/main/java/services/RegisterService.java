@@ -2,6 +2,7 @@ package services;
 
 import dao.UserDao;
 import exceptions.InvalidCredentialsException;
+import exceptions.InvalidNumberOfGenerations;
 import models.User;
 import requests.RegisterRequest;
 import results.RegisterResult;
@@ -36,6 +37,9 @@ public class RegisterService {
             result.setMessage(ex.getMessage());
             result.setSuccess(false);
         } catch (InvalidCredentialsException ex) {
+            result.setMessage(ex.getMessage());
+            result.setSuccess(false);
+        } catch (InvalidNumberOfGenerations ex) {
             result.setMessage(ex.getMessage());
             result.setSuccess(false);
         }

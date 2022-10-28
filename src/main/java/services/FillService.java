@@ -1,6 +1,9 @@
 package services;
 
+import dao.EventDao;
+import dao.PersonDao;
 import dao.UserDao;
+import exceptions.InvalidNumberOfGenerations;
 import models.User;
 import requests.FillRequest;
 import results.FillResult;
@@ -26,7 +29,16 @@ public class FillService {
             ClearUtil.ClearForUser(request.getUsername());
 
             PopulationGenerator.populateGenerations(user, request.getGenerations());
+
+            int numPersons = new PersonDao().GetAllPersons(request.getUsername()).size();
+            int numEvents = new EventDao().GetEvents(request.getUsername()).size();
+
+            String message = "Successfully added " + numPersons + " persons and " + numEvents + " events to the database.";
+            result.setMessage(message);
         } catch(SQLException ex) {
+            result.setMessage(ex.getMessage());
+            result.setSuccess(false);
+        } catch (InvalidNumberOfGenerations ex) {
             result.setMessage(ex.getMessage());
             result.setSuccess(false);
         }

@@ -3,6 +3,7 @@ package util;
 import dao.EventDao;
 import dao.PersonDao;
 import dao.UserDao;
+import exceptions.InvalidNumberOfGenerations;
 import models.Event;
 import models.Person;
 import models.User;
@@ -22,7 +23,7 @@ public class PopulationGenerator {
      * @param user The user to populate
      * @param generations The number of generations to generate
      */
-    public static void populateGenerations(User user, int generations) throws SQLException {
+    public static void populateGenerations(User user, int generations) throws SQLException, InvalidNumberOfGenerations {
         Person person = generatePerson(user.getUsername(), user.getGender(), generations, user.getFirstName(), user.getLastName(), LocalDate.now().getYear() - GENERATION_GAP);
         user.setPersonID(person.getPersonID());
         new UserDao().UpdateUser(user);
@@ -38,7 +39,11 @@ public class PopulationGenerator {
      * @return The generated Person
      * @throws SQLException
      */
-    private static Person generatePerson(String username, char gender, int generations, String firstname, String lastname, int year) throws SQLException {
+    private static Person generatePerson(String username, char gender, int generations, String firstname, String lastname, int year) throws SQLException, InvalidNumberOfGenerations {
+        if (generations < 0) {
+            throw new InvalidNumberOfGenerations();
+        }
+
         Person mother = null;
         Person father = null;
 
