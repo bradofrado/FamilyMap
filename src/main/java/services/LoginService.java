@@ -1,6 +1,8 @@
 package services;
 
+import dao.UserDao;
 import exceptions.InvalidCredentialsException;
+import models.User;
 import results.LoginResult;
 import requests.LoginRequest;
 import util.UserUtil;
@@ -21,9 +23,11 @@ public class LoginService {
 
         try {
             String token = UserUtil.LoginUser(request.getUsername(), request.getPassword());
+            User user = new UserDao().GetUser(request.getUsername());
+
             result.setAuthtoken(token);
-            result.setUsername(request.getUsername());
-            result.setPersonID("");
+            result.setUsername(user.getUsername());
+            result.setPersonID(user.getPersonID());
         } catch(SQLException ex) {
             result.setMessage(ex.getMessage());
             result.setSuccess(false);

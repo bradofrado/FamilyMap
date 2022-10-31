@@ -95,7 +95,10 @@ public class ServiceTest {
             personRequest.setPersonID(persons.get(0).getPersonID());
 
             try {
-                new PersonDao().AddPersons(persons);
+                PersonDao personDao = new PersonDao();
+
+                personDao.DeleteAll();
+                personDao.AddPersons(persons);
             } catch (SQLException ex) {
 
             }
@@ -128,7 +131,7 @@ public class ServiceTest {
             PersonsResult result = PersonService.Persons(badRequest);
 
             assertFalse(result.isSuccess());
-            assertEquals(EMPTY_STRING, result.getMessage());
+            assertNotNull(result.getMessage());
         }
 
         @Test
@@ -142,7 +145,7 @@ public class ServiceTest {
             assertEquals(person.getAssociatedUsername(), result.getAssociatedUsername());
             assertEquals(person.getFirstName(), result.getFirstName());
             assertEquals(person.getLastName(), result.getLastName());
-            assertEquals(person.getGender(), result.getGender());
+            assertEquals(person.getGender(), result.getGender().charAt(0));
             assertEquals(person.getFatherID(), result.getFatherID());
             assertEquals(person.getMotherID(), result.getMotherID());
             assertEquals(person.getSpouseID(), result.getSpouseID());
@@ -156,7 +159,7 @@ public class ServiceTest {
             PersonResult result = PersonService.Person(badRequest);
 
             assertFalse(result.isSuccess());
-            assertEquals(EMPTY_STRING, result.getMessage());
+            assertNotNull(result.getMessage());
         }
     }
 
@@ -188,6 +191,7 @@ public class ServiceTest {
             eventRequest.setEventID(events.get(0).getEventID());
 
             try {
+                new EventDao().DeleteAll();
                 new EventDao().AddEvents(events);
             } catch (SQLException ex) {
 
@@ -221,7 +225,7 @@ public class ServiceTest {
             EventsResult result = EventService.Events(badRequest);
 
             assertFalse(result.isSuccess());
-            assertEquals(EMPTY_STRING, result.getMessage());
+            assertNotNull(result.getMessage());
         }
 
         @Test
@@ -250,7 +254,7 @@ public class ServiceTest {
             EventResult result = EventService.Event(badRequest);
 
             assertFalse(result.isSuccess());
-            assertEquals(EMPTY_STRING, result.getMessage());
+            assertNotNull(result.getMessage());
         }
     }
 
@@ -263,12 +267,15 @@ public class ServiceTest {
         @BeforeEach
         public void setup() {
             loginRequest = new LoginRequest(john);
+
+            RegisterResult result = services.RegisterService.Register(new RegisterRequest(john));
+            john.setPersonID(result.getPersonID());
         }
 
         @AfterEach
         public void cleanup() {
             try {
-                new AuthTokenDao().DeleteAll();
+                ClearUtil.ClearDatabase();
             } catch (SQLException ex) {
 
             }
@@ -278,11 +285,11 @@ public class ServiceTest {
         public void TestLogin() {
             LoginResult result = LoginService.Login(loginRequest);
 
+            assertTrue(result.isSuccess());
+            assertEquals(EMPTY_STRING, result.getMessage());
             assertNotEquals(EMPTY_STRING, result.getAuthtoken());
             assertEquals(john.getUsername(), result.getUsername());
             assertEquals(john.getPersonID(), result.getPersonID());
-            assertTrue(result.isSuccess());
-            assertEquals(EMPTY_STRING, result.getMessage());
         }
 
         @Test

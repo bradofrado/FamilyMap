@@ -33,7 +33,7 @@ public class EventService {
             result.setPersonID(event.getPersonID());
             result.setAssociatedUsername(event.getAssociatedUsername());
             result.setLatitude(event.getLatitude());
-            result.setLongitude(event.getLatitude());
+            result.setLongitude(event.getLongitude());
             result.setCountry(event.getCountry());
             result.setCity(event.getCity());
             result.setEventType(event.getEventType());

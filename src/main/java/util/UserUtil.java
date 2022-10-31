@@ -29,9 +29,11 @@ public class UserUtil {
             throw new InvalidCredentialsException();
         }
 
-        new AuthTokenDao().AddAuthToken(new AuthToken("abc", user.getUsername()));
+        String token = DataGenerator.getRandomId();
 
-        return "abc";
+        new AuthTokenDao().AddAuthToken(new AuthToken(token, user.getUsername()));
+
+        return token;
     }
 
     /**
