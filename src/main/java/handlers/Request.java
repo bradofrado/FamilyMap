@@ -2,6 +2,9 @@ package handlers;
 
 import java.util.Map;
 
+/**
+ * A generic request object that holds necessary data for the handlers
+ */
 public class Request {
     private String authToken;
     private String body;

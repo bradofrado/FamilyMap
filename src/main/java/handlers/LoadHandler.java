@@ -8,6 +8,9 @@ import util.Encoder;
 
 import java.io.IOException;
 
+/**
+ * Http handler for the /load endpoint
+ */
 public class LoadHandler extends Handler {
 
     @Override

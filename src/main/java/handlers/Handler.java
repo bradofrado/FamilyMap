@@ -75,7 +75,9 @@ public abstract class Handler implements HttpHandler {
     }
 
     /**
-     *
+     * Sends back a result object. Takes care of error cases
+     * @param result The result object to serialize and pass back
+     * @throws IOException Thrown when it is not sent properly
      */
     protected void sendResult(Result result) throws IOException {
         if (result.isSuccess()) {
@@ -161,6 +163,9 @@ public abstract class Handler implements HttpHandler {
         return sb.toString();
     }
 
+    /**
+     * A holder class for routes
+     */
     private class Route {
         static final String REGEX = "\\{(\\w*)\\}";
 
@@ -206,6 +211,11 @@ public abstract class Handler implements HttpHandler {
             return matcher.matches();
         }
 
+        /**
+         * Gets a map of the optional parameters with their values for the given path
+         * @param path The path with filled optional parameters
+         * @return A key value pair of the parameters
+         */
         public Map<String, String> getParameters(String path) {
             Map<String, String> paramsMap = new HashMap<>();
 

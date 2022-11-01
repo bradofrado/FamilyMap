@@ -7,6 +7,9 @@ import util.Encoder;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 
+/**
+ * Handler for the /clear endpoint
+ */
 public class ClearHandler extends Handler {
     @Override
     protected void initRoutes() {

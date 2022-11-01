@@ -37,9 +37,6 @@ public class Server {
         // forwards the request to the handler for that URL path.
         System.out.println("Creating contexts");
 
-        //server.createContext("/games/list", new ListGamesHandler());
-        //server.createContext("/routes/claim", new ClaimRouteHandler());
-
         server.createContext("/user/register", new RegisterHandler());
         server.createContext("/user/login", new LoginHandler());
         server.createContext("/event", new EventHandler());

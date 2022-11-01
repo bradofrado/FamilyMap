@@ -8,6 +8,9 @@ import services.PersonService;
 
 import java.io.IOException;
 
+/**
+ * Http handler for the /person and /person/{id} endpoints
+ */
 public class PersonHandler extends Handler {
     @Override
     protected void initRoutes() {

@@ -9,6 +9,9 @@ import java.io.IOException;
 import java.security.spec.ECField;
 import java.util.Map;
 
+/**
+ * Http handler for the /fill/{username}/{generations} endpoint
+ */
 public class FillHandler extends Handler {
 
     @Override
