@@ -22,7 +22,8 @@ public class FileHandler extends Handler {
         String filePath = "web" + path;
         File file = new File(filePath);
         if (!file.exists()) {
-            sendStatus(HttpURLConnection.HTTP_NOT_FOUND);
+            file = new File("web/html/404.html");
+            sendFile(HttpURLConnection.HTTP_NOT_FOUND, file);
             return;
         }
 
@@ -32,6 +33,6 @@ public class FileHandler extends Handler {
 
     @Override
     protected void initRoutes() {
-        get("/{file}", this::get);
+        get("/", this::get);
     }
 }

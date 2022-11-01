@@ -16,7 +16,8 @@ import java.time.LocalDate;
  */
 public class PopulationGenerator {
     private static final int GENERATION_GAP = 25;
-
+    private static final PersonDao personDao = new PersonDao();
+    private static final EventDao eventDao = new EventDao();
 
     /**
      * Populates the given amount of generations for the given user
@@ -54,6 +55,9 @@ public class PopulationGenerator {
             mother.setSpouseID(father.getPersonID());
             father.setSpouseID(mother.getPersonID());
 
+            personDao.UpdatePerson(mother);
+            personDao.UpdatePerson(father);
+
             //Create and save marriage event
             Event fatherMarriage = DataGenerator.getRandomEvent(username, "marriage", father.getPersonID(), year - 5, year + 5);
             Event motherMarriage = new Event(fatherMarriage, DataGenerator.getRandomId(), mother.getPersonID());
@@ -82,7 +86,10 @@ public class PopulationGenerator {
 
         if (father != null) {
             person.setFatherID(father.getPersonID());
-            person.setLastName(father.getLastName());
+
+            if (lastname == null) {
+                person.setLastName(father.getLastName());
+            }
         }
 
         savePerson(person);
@@ -94,10 +101,10 @@ public class PopulationGenerator {
     }
 
     private static void saveEvent(Event event) throws SQLException {
-        new EventDao().AddEvent(event);
+        eventDao.AddEvent(event);
     }
 
     private static void savePerson(Person person) throws SQLException {
-        new PersonDao().AddPerson(person);
+        personDao.AddPerson(person);
     }
 }

@@ -21,8 +21,6 @@ W
 N
 src/main/java/models/User.java,f\7\f7010c4f46d3b9dd8d59899249df5ba3ee23f96b
 V
-&src/main/java/results/LoginResult.java,5\6\56adb8df9e905a53c489c282698af7e82999fee1
-V
 &src/main/java/results/EventResult.java,a\0\a0932ff066a836a6ebf6b0fb6dc9faec734c8f3f
 X
 (src/main/java/requests/EventRequest.java,8\1\81a9ed69e5a098975e65a62639a3746373216a1e

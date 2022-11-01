@@ -19,6 +19,7 @@ public class ClearService {
 
         try {
             ClearUtil.ClearDatabase();
+            result.setMessage("Clear succeeded");
         } catch (SQLException ex) {
             result.setMessage(ex.getMessage());
             result.setSuccess(false);

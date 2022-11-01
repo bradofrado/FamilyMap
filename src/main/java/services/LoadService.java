@@ -27,6 +27,10 @@ public class LoadService {
             new UserDao().AddUsers(Arrays.asList(request.getUsers()));
             new PersonDao().AddPersons(Arrays.asList(request.getPersons()));
             new EventDao().AddEvents(Arrays.asList(request.getEvents()));
+
+            String message = "Successfully added " + request.getUsers().length + " users, " + request.getPersons().length +
+                    " persons, and " + request.getEvents().length + " events to the database.";
+            result.setMessage(message);
         } catch(SQLException ex) {
             result.setMessage(ex.getMessage());
             result.setSuccess(false);

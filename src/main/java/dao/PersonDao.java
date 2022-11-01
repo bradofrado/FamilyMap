@@ -60,6 +60,12 @@ public class PersonDao extends Dao {
         return persons;
     }
 
+    public void UpdatePerson(Person person) throws SQLException {
+        doTransaction((connection) -> {
+            updatePerson(connection, person);
+        });
+    }
+
     /**
      * Deletes all person data from the database
      */
@@ -123,6 +129,27 @@ public class PersonDao extends Dao {
             }
 
             return persons;
+        }
+    }
+
+    private void updatePerson(Connection connection, Person person) throws SQLException {
+        String sql = "update person set firstName = ?, lastName = ?, associatedUsername = ?, gender = ?, fatherID = ?, motherID = ?, spouseID = ? where personID = ?";
+
+        try (PreparedStatement stmt= connection.prepareStatement(sql)) {
+            stmt.setString(1, person.getFirstName());
+            stmt.setString(2, person.getLastName());
+            stmt.setString(3, person.getAssociatedUsername());
+            stmt.setString(4, person.getGender() + "");
+            stmt.setString(5, person.getFatherID());
+            stmt.setString(6, person.getMotherID());
+            stmt.setString(7, person.getSpouseID());
+            stmt.setString(8, person.getPersonID());
+
+            if (stmt.executeUpdate() == 1) {
+                System.out.println("Updated person " + person);
+            } else {
+                System.out.println("Failed to update person");
+            }
         }
     }
 

@@ -81,7 +81,7 @@ public abstract class Handler implements HttpHandler {
         if (result.isSuccess()) {
             send(HttpURLConnection.HTTP_OK, Encoder.Encode(result));
         } else {
-            send(HttpURLConnection.HTTP_INTERNAL_ERROR, Encoder.Encode(result));
+            send(HttpURLConnection.HTTP_BAD_REQUEST, Encoder.Encode(result));
         }
     }
 
@@ -189,8 +189,16 @@ public abstract class Handler implements HttpHandler {
             return handlerMethod;
         }
 
+        /**
+         * Checks the given method and path to this route object to see if it matches
+         * @param method The method to check
+         * @param path The path to check including optional paths (/events/{id})
+         * @return Whether or not this route matches
+         */
         public boolean checkRoute(String method, String path) {
             if (!method.equals(this.method)) return false;
+
+            if (this.path.equals("/")) return true;
 
             Pattern pattern = Pattern.compile(getPathRegex(this.path));
             Matcher matcher = pattern.matcher(path);
@@ -207,8 +215,6 @@ public abstract class Handler implements HttpHandler {
                 return null;
             }
 
-            // /events/asdf
-            // /events/{id}
             Pattern pattern = Pattern.compile(regex);
             Matcher matcher = pattern.matcher(path);
             if (matcher.matches()) {

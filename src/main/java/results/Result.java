@@ -23,7 +23,9 @@ public class Result {
     }
 
     public void setSuccess(boolean success) {
+
         this.success=success;
+        message = "Error: " + message;
     }
 
     public void Result() {
