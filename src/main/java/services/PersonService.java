@@ -25,6 +25,12 @@ public class PersonService {
             User user = UserUtil.GetUser(request.getAuthToken());
             Person person = new PersonDao().GetPerson(request.getPersonID(), user.getUsername());
 
+            if (person == null) {
+                result.setMessage("Cannot find person with id " + request.getPersonID());
+                result.setSuccess(false);
+                return result;
+            }
+
             result.setPersonID(person.getPersonID());
             result.setAssociatedUsername(person.getAssociatedUsername());
             result.setFirstName(person.getFirstName());

@@ -43,6 +43,7 @@ public abstract class Handler implements HttpHandler {
             Route route = getRoute(method, path);
             if (route == null) {
                 sendStatus(HttpURLConnection.HTTP_NOT_FOUND);
+                return;
             }
 
             //Get the authorization token
@@ -53,7 +54,7 @@ public abstract class Handler implements HttpHandler {
             Request request=new Request(path, authToken, body, route.getParameters(path));
 
             route.getHandlerMethod().run(request);
-        } catch (IOException ex) {
+        } catch (Exception ex) {
             sendStatus(HttpURLConnection.HTTP_INTERNAL_ERROR);
             ex.printStackTrace();
         }
@@ -210,9 +211,11 @@ public abstract class Handler implements HttpHandler {
             // /events/{id}
             Pattern pattern = Pattern.compile(regex);
             Matcher matcher = pattern.matcher(path);
-            for (int i = 1; i <= matcher.groupCount(); i++) {
-                String val = matcher.group(i);
-                paramsMap.put(parameters.get(i-1), val);
+            if (matcher.matches()) {
+                for (int i=1; i <= matcher.groupCount(); i++) {
+                    String val=matcher.group(i);
+                    paramsMap.put(parameters.get(i - 1), val);
+                }
             }
 
             return paramsMap;
@@ -227,7 +230,7 @@ public abstract class Handler implements HttpHandler {
 
             Pattern pattern = Pattern.compile(REGEX);
             Matcher matcher = pattern.matcher(path);
-            if (matcher.find()) {
+            while (matcher.find()) {
                 for (int i = 1; i <= matcher.groupCount(); i++) {
                     String group = matcher.group(i);
                     params.add(group);

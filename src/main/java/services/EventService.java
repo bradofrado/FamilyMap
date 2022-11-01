@@ -29,6 +29,12 @@ public class EventService {
             User user = UserUtil.GetUser(request.getAuthToken());
             Event event = new EventDao().GetEvent(request.getEventID(), user.getUsername());
 
+            if (event == null) {
+                result.setMessage("Cannot find event with id " + request.getEventID());
+                result.setSuccess(false);
+                return result;
+            }
+
             result.setEventID(event.getEventID());
             result.setPersonID(event.getPersonID());
             result.setAssociatedUsername(event.getAssociatedUsername());

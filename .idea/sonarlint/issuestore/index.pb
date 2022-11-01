@@ -22,8 +22,6 @@ N
 src/main/java/models/User.java,f\7\f7010c4f46d3b9dd8d59899249df5ba3ee23f96b
 V
 &src/main/java/results/LoginResult.java,5\6\56adb8df9e905a53c489c282698af7e82999fee1
-i
-9src/main/java/exceptions/InvalidCredentialsException.java,d\4\d45821a15d9e674fe987ee1e8f69c4e503412f00
 V
 &src/main/java/results/EventResult.java,a\0\a0932ff066a836a6ebf6b0fb6dc9faec734c8f3f
 X

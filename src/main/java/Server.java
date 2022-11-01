@@ -41,6 +41,7 @@ public class Server {
         //server.createContext("/routes/claim", new ClaimRouteHandler());
 
         server.createContext("/user/register", new RegisterHandler());
+        server.createContext("/user/login", new LoginHandler());
         server.createContext("/event", new EventHandler());
         server.createContext("/person", new PersonHandler());
         server.createContext("/load", new LoadHandler());
