@@ -26,6 +26,6 @@ public class RegisterHandler extends Handler {
         RegisterRequest registerRequest = Encoder.Decode(request.getBody(), RegisterRequest.class);
         RegisterResult result = RegisterService.Register(registerRequest);
 
-        send(HttpURLConnection.HTTP_OK, Encoder.Encode(result));
+        sendResult(result);
     }
 }

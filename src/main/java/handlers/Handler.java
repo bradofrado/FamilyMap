@@ -3,14 +3,18 @@ package handlers;
 import com.sun.net.httpserver.Headers;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
+import results.Result;
+import util.Encoder;
 
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.nio.file.Files;
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public abstract class Handler implements HttpHandler {
-    private Map<String, HandlerMethod> routes = new HashMap<>();
+    private List<Route> routes = new ArrayList<>();
     private HttpExchange exchange;
 
     /**
@@ -35,26 +39,20 @@ public abstract class Handler implements HttpHandler {
             String path=exchange.getRequestURI().getPath();
             String method=exchange.getRequestMethod().toLowerCase();
 
-            //Gets the method for the given http verb and path. Defaults to /
-            String key=getKey(method, path);
-            if (!routes.containsKey(key)) {
-                key = getKey(method, "/");
-                if (!routes.containsKey(key)) {
-                    sendStatus(HttpURLConnection.HTTP_NOT_FOUND);
-                    return;
-                }
+            //Create the request object
+            Route route = getRoute(method, path);
+            if (route == null) {
+                sendStatus(HttpURLConnection.HTTP_NOT_FOUND);
             }
 
             //Get the authorization token
             Headers header=exchange.getRequestHeaders();
             String authToken=header.containsKey("Authorization") ? header.getFirst("Authorization") : null;
 
-            //Create the request object
-            HandlerMethod handlerMethod=routes.get(key);
             String body = readString(exchange.getRequestBody());
-            Request request=new Request(path, authToken, body);
+            Request request=new Request(path, authToken, body, route.getParameters(path));
 
-            handlerMethod.run(request);
+            route.getHandlerMethod().run(request);
         } catch (IOException ex) {
             sendStatus(HttpURLConnection.HTTP_INTERNAL_ERROR);
             ex.printStackTrace();
@@ -73,6 +71,17 @@ public abstract class Handler implements HttpHandler {
         OutputStream responseBody = this.exchange.getResponseBody();
         writeString(message, responseBody);
         responseBody.close();
+    }
+
+    /**
+     *
+     */
+    protected void sendResult(Result result) throws IOException {
+        if (result.isSuccess()) {
+            send(HttpURLConnection.HTTP_OK, Encoder.Encode(result));
+        } else {
+            send(HttpURLConnection.HTTP_INTERNAL_ERROR, Encoder.Encode(result));
+        }
     }
 
     /**
@@ -118,17 +127,20 @@ public abstract class Handler implements HttpHandler {
         addPath("post", path, method);
     }
 
-    private void addPath(String method, String path, HandlerMethod handlerMethod) {
-        String key = getKey(method, path);
-        if (!routes.containsKey(key)) {
-            routes.put(key, handlerMethod);
-        } else {
-            routes.replace(key, handlerMethod);
+    private Route getRoute(String method, String path) {
+        for (Route route : routes) {
+            if (route.checkRoute(method, path)) {
+                return route;
+            }
         }
+
+        return null;
     }
 
-    private String getKey(String method, String path) {
-        return method + ": " + path;
+    private void addPath(String method, String path, HandlerMethod handlerMethod) {
+        Route route = new Route(method, path, handlerMethod);
+
+        routes.add(route);
     }
 
     private void writeString(String str, OutputStream os) throws IOException {
@@ -146,5 +158,84 @@ public abstract class Handler implements HttpHandler {
             sb.append(buf, 0, len);
         }
         return sb.toString();
+    }
+
+    private class Route {
+        static final String REGEX = "\\{(\\w*)\\}";
+
+        String path;
+        String method;
+        List<String> parameters;
+        HandlerMethod handlerMethod;
+
+        public Route(String method, String path, HandlerMethod handlerMethod) {
+            this.path = path;
+            this.method = method;
+            this.handlerMethod = handlerMethod;
+
+            parameters = createParameters(path);
+        }
+
+        public String getPath() {
+            return path;
+        }
+
+        public String getMethod() {
+            return method;
+        }
+
+        public HandlerMethod getHandlerMethod() {
+            return handlerMethod;
+        }
+
+        public boolean checkRoute(String method, String path) {
+            if (!method.equals(this.method)) return false;
+
+            Pattern pattern = Pattern.compile(getPathRegex(this.path));
+            Matcher matcher = pattern.matcher(path);
+
+            return matcher.matches();
+        }
+
+        public Map<String, String> getParameters(String path) {
+            Map<String, String> paramsMap = new HashMap<>();
+
+            String regex = getPathRegex(this.path);//"\\/events\\/(\\w*)";
+
+            if (!checkRoute(this.method, path)) {
+                return null;
+            }
+
+            // /events/asdf
+            // /events/{id}
+            Pattern pattern = Pattern.compile(regex);
+            Matcher matcher = pattern.matcher(path);
+            for (int i = 1; i <= matcher.groupCount(); i++) {
+                String val = matcher.group(i);
+                paramsMap.put(parameters.get(i-1), val);
+            }
+
+            return paramsMap;
+        }
+
+        private String getPathRegex(String origPath) {
+            return origPath.replaceAll("/", "\\\\/").replaceAll(REGEX, "([\\\\w|\\\\-]*)");
+        }
+
+        private List<String> createParameters(String path) {
+            List<String> params = new ArrayList<>();
+
+            Pattern pattern = Pattern.compile(REGEX);
+            Matcher matcher = pattern.matcher(path);
+            if (matcher.find()) {
+                for (int i = 1; i <= matcher.groupCount(); i++) {
+                    String group = matcher.group(i);
+                    params.add(group);
+                }
+            }
+
+            return params;
+        }
+
     }
 }

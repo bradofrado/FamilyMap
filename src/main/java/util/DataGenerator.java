@@ -56,21 +56,22 @@ public class DataGenerator {
      * @return A string of random id
      */
     public static String getRandomId() {
-        String id = "";
-        for (int i = 0; i < ID_LENGTH; i++) {
-            int val = getRandomValue((int)'a', (int)'z');
-
-            id += (char)val;
-        }
-
-        //Make sure this id is unique
-        if (Ids.contains(id)) {
-            return getRandomId();
-        }
-
-        Ids.add(id);
-
-        return id;
+//        String id = "";
+//        for (int i = 0; i < ID_LENGTH; i++) {
+//            int val = getRandomValue((int)'a', (int)'z');
+//
+//            id += (char)val;
+//        }
+//
+//        //Make sure this id is unique
+//        if (Ids.contains(id)) {
+//            return getRandomId();
+//        }
+//
+//        Ids.add(id);
+//
+//        return id;
+        return UUID.randomUUID().toString();
     }
 
     private static <T> T getRandomValue(DataHolder<T> dataHolder) {

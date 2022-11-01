@@ -9,6 +9,7 @@ import util.Encoder;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
+import java.util.Map;
 
 /**
  * The http handler for the /event and /event/{id} paths
@@ -31,13 +32,21 @@ public class EventHandler extends Handler {
 
         EventsResult result = EventService.Events(eventRequest);
 
-        send(HttpURLConnection.HTTP_OK, Encoder.Encode(result));
+        sendResult(result);
     }
 
     /**
      * The endpoint for the /event/[id]. Gets the event for the given id
      */
-    private void getEvent(Request request) {
+    private void getEvent(Request request) throws IOException {
+        EventRequest eventRequest = new EventRequest();
+        eventRequest.setAuthToken(request.getAuthToken());
 
+        Map<String, String> params = request.getParameters();
+        eventRequest.setEventID(params.get("id"));
+
+        EventResult result = EventService.Event(eventRequest);
+
+        sendResult(result);
     }
 }

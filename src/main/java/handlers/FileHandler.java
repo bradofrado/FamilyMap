@@ -32,6 +32,6 @@ public class FileHandler extends Handler {
 
     @Override
     protected void initRoutes() {
-        get("/", this::get);
+        get("/{file}", this::get);
     }
 }
