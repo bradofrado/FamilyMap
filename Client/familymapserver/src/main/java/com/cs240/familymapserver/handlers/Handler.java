@@ -4,7 +4,7 @@ import com.sun.net.httpserver.Headers;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import com.cs240.familymapmodules.results.Result;
-import com.cs240.familymapserver.util.Encoder;
+import com.cs240.familymapmodules.util.Encoder;
 
 import java.io.*;
 import java.net.HttpURLConnection;

@@ -2,10 +2,8 @@ package com.cs240.familymapserver.handlers;
 
 import com.cs240.familymapmodules.results.ClearResult;
 import com.cs240.familymapserver.services.ClearService;
-import com.cs240.familymapserver.util.Encoder;
 
 import java.io.IOException;
-import java.net.HttpURLConnection;
 
 /**
  * Handler for the /clear endpoint

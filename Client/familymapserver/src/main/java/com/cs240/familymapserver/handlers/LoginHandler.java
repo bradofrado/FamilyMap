@@ -3,7 +3,7 @@ package com.cs240.familymapserver.handlers;
 import com.cs240.familymapmodules.requests.LoginRequest;
 import com.cs240.familymapmodules.results.LoginResult;
 import com.cs240.familymapserver.services.LoginService;
-import com.cs240.familymapserver.util.Encoder;
+import com.cs240.familymapmodules.util.Encoder;
 
 import java.io.IOException;
 

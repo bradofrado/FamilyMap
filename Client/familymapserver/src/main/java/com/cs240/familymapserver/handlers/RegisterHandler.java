@@ -3,10 +3,9 @@ package com.cs240.familymapserver.handlers;
 import com.cs240.familymapmodules.requests.RegisterRequest;
 import com.cs240.familymapmodules.results.RegisterResult;
 import com.cs240.familymapserver.services.RegisterService;
-import com.cs240.familymapserver.util.Encoder;
+import com.cs240.familymapmodules.util.Encoder;
 
 import java.io.IOException;
-import java.net.HttpURLConnection;
 
 /**
  * Handles the endpoint for /user/register

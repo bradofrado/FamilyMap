@@ -1,4 +1,4 @@
-package com.cs240.familymapserver.util;
+package com.cs240.familymapmodules.util;
 
 import com.google.gson.Gson;
 

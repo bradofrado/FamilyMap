@@ -5,10 +5,8 @@ import com.cs240.familymapmodules.requests.EventsRequest;
 import com.cs240.familymapmodules.results.EventResult;
 import com.cs240.familymapmodules.results.EventsResult;
 import com.cs240.familymapserver.services.EventService;
-import com.cs240.familymapserver.util.Encoder;
 
 import java.io.IOException;
-import java.net.HttpURLConnection;
 import java.util.Map;
 
 /**

@@ -3,10 +3,8 @@ package com.cs240.familymapserver.handlers;
 import com.cs240.familymapmodules.requests.FillRequest;
 import com.cs240.familymapmodules.results.FillResult;
 import com.cs240.familymapserver.services.FillService;
-import com.cs240.familymapserver.util.Encoder;
 
 import java.io.IOException;
-import java.security.spec.ECField;
 import java.util.Map;
 
 /**

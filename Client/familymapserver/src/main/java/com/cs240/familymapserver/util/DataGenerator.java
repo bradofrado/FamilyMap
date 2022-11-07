@@ -2,10 +2,9 @@ package com.cs240.familymapserver.util;
 
 import com.cs240.familymapmodules.models.Event;
 import com.cs240.familymapmodules.models.Person;
+import com.cs240.familymapmodules.util.Encoder;
 
 import java.io.FileNotFoundException;
-import java.lang.reflect.Array;
-import java.lang.reflect.ParameterizedType;
 import java.util.*;
 
 public class DataGenerator {
