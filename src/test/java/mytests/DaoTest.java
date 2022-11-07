@@ -9,8 +9,11 @@ import models.Event;
 import models.Person;
 import models.User;
 import org.junit.jupiter.api.*;
+import util.DataGenerator;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -19,10 +22,13 @@ public class DaoTest {
     @DisplayName("UserDao Operations")
     class user {
         User user;
+        User user2;
+
         UserDao userDao;
         @BeforeEach
         public void startup() {
             user = new User("bradofrado", "mypassword", "bradofrado@gmail.com", "Braydon", "Jones", 'm', "asdf");
+            user2 = new User("johnny", "man", "john@man.com", "John", "Man", 'm', "asdf");
 
             userDao = new UserDao();
             userDao.startTransaction();
@@ -55,6 +61,24 @@ public class DaoTest {
         }
 
         @Test
+        public void TestAddUsers() {
+            try {
+                List<User> users = new ArrayList<>() { { add(user); } { add(user2); }};
+                userDao.AddUsers(users);
+            } catch (SQLException ex) {
+                fail(ex.getMessage());
+            }
+        }
+
+        @Test
+        public void TestAddUsersFail() {
+            List<User> users = new ArrayList<>() { { add(user); } { add(user); }};
+            assertThrows(SQLException.class, () -> {
+                userDao.AddUsers(users);
+            });
+        }
+
+        @Test
         public void TestGetUser() {
             try {
                 userDao.AddUser(user);
@@ -81,6 +105,21 @@ public class DaoTest {
         public void TestUserClear() {
             try {
                 userDao.AddUser(user);
+                userDao.DeleteAll();
+
+                assertNull(userDao.GetUser(user.getEmail()));
+            } catch (SQLException ex) {
+                fail(ex.getMessage());
+            }
+        }
+
+        @Test
+        public void TestUserClear2() {
+            try {
+                List<User> users = new ArrayList<>() { { add(user); } { add(user2); }};
+                userDao = new UserDao();
+
+                userDao.AddUsers(users);
                 userDao.DeleteAll();
 
                 assertNull(userDao.GetUser(user.getEmail()));
@@ -127,10 +166,13 @@ public class DaoTest {
     @DisplayName("Event Dao Operations")
     class event {
         Event event;
+        Event event2;
+
         EventDao eventDao;
         @BeforeEach
         public void setup() {
-            event = new Event("hellothere", "bradofrado", "asdf", 0, 10, "USA", "Morgan", "math", 1980);
+            event =DataGenerator.getRandomEvent("john", "birth", "asdf", 0, 2020);
+            event2 =DataGenerator.getRandomEvent("john", "marriage", "asdf", 0, 2020);
 
             eventDao = new EventDao();
             eventDao.startTransaction();
@@ -139,6 +181,7 @@ public class DaoTest {
         public void cleanup() {
             eventDao.endTransaction();
         }
+
         @Test
         public void TestAddEvent() {
             try {
@@ -158,6 +201,26 @@ public class DaoTest {
             assertThrows(SQLException.class, () -> {
                 eventDao.AddEvent(event);
             });
+        }
+
+        @Test
+        public void TestAddEvents() {
+            try {
+                List<Event> events = new ArrayList<>() {{add(event);} {add(event2); }};
+                eventDao.AddEvents(events);
+            } catch (SQLException ex) {
+                fail(ex.getMessage());
+            }
+        }
+
+        @Test
+        public void TestAddEventsNoEvents() {
+            try {
+                List<Event> events = new ArrayList<>();
+                eventDao.AddEvents(events);
+            } catch (SQLException ex) {
+                fail(ex.getMessage());
+            }
         }
 
         @Test
@@ -184,9 +247,77 @@ public class DaoTest {
         }
 
         @Test
+        public void TestGetEvents() {
+            try {
+                List<Event> events = new ArrayList<>() {{add(event);} {add(event2);}};
+                eventDao.AddEvents(events);
+                List<Event> findEvents=eventDao.GetEvents(event.getAssociatedUsername());
+
+                assertEquals(events.size(), findEvents.size());
+                assertTrue(events.contains(event));
+                assertTrue(events.contains(event2));
+            } catch (SQLException ex) {
+                fail(ex.getMessage());
+            }
+        }
+
+        @Test
+        public void TestGetEventsFail() {
+            try {
+                List<Event> events = new ArrayList<>() {{add(event);} {add(event2);}};
+                eventDao.AddEvents(events);
+                List<Event> findEvents=eventDao.GetEvents("garbageusername");
+                assertEquals(0, findEvents.size());
+            } catch (SQLException ex) {
+                fail(ex.getMessage());
+            }
+        }
+
+        @Test
         public void TestEventClear() {
             try {
+                event2.setAssociatedUsername("bob");
+
+                List<Event> events = new ArrayList<>() {{add(event);} {add(event2);}};
+                eventDao.AddEvents(events);
+                eventDao.DeleteAll(event.getAssociatedUsername());
+                assertNull(eventDao.GetEvent(event.getEventID(), event.getAssociatedUsername()));
+
+                List<Event> findEvents = eventDao.GetEvents(event2.getAssociatedUsername());
+                assertEquals(1, findEvents.size());
+                assertEquals(event2, findEvents.get(0));
+            } catch (SQLException ex) {
+                fail(ex.getMessage());
+            }
+        }
+
+        @Test
+        public void TestEventClearFail() {
+            try {
                 eventDao.AddEvent(event);
+                eventDao.DeleteAll("garbade");
+
+                assertNotNull(eventDao.GetEvent(event.getEventID(), event.getAssociatedUsername()));
+            } catch (SQLException ex) {
+                fail(ex.getMessage());
+            }
+        }
+
+        @Test
+        public void TestEventClearAll() {
+            try {
+                eventDao.AddEvent(event);
+                eventDao.DeleteAll();
+
+                assertNull(eventDao.GetEvent(event.getEventID(), event.getAssociatedUsername()));
+            } catch (SQLException ex) {
+                fail(ex.getMessage());
+            }
+        }
+
+        @Test
+        public void TestEventClearAllWithoutAdd() {
+            try {
                 eventDao.DeleteAll();
 
                 assertNull(eventDao.GetEvent(event.getEventID(), event.getAssociatedUsername()));
@@ -200,11 +331,14 @@ public class DaoTest {
     @DisplayName("Person Dao Operations")
     class person {
         Person person;
+        Person person2;
+
         PersonDao personDao;
 
         @BeforeEach
         public void startup() {
-            person = new Person("asdf", "bradofrado", "Braydon", "Jones", 'm');
+            person = DataGenerator.getRandomPerson("bradofrado", 'm');
+            person2 = DataGenerator.getRandomPerson("bradofrado", 'f');
 
             personDao = new PersonDao();
             personDao.startTransaction();
@@ -237,6 +371,24 @@ public class DaoTest {
         }
 
         @Test
+        public void TestAddPersons() {
+            try {
+                List<Person> persons = new ArrayList<>() {{add(person);} {add(person2);}};
+                personDao.AddPersons(persons);
+            } catch (SQLException ex) {
+                fail(ex.getMessage());
+            }
+        }
+
+        @Test
+        public void TestAddPersonsFail() {
+            List<Person> persons = new ArrayList<>() {{add(person);} {add(person);}};
+            assertThrows(SQLException.class, () -> {
+                personDao.AddPersons(persons);
+            });
+        }
+
+        @Test
         public void TestGetPerson() {
             try {
                 personDao.AddPerson(person);
@@ -260,9 +412,111 @@ public class DaoTest {
         }
 
         @Test
-        public void TestPersonClear() {
+        public void TestGetPersons() {
+            try {
+                List<Person> persons = new ArrayList<>() {{add(person);} {add(person2);}};
+                personDao.AddPersons(persons);
+
+                List<Person> findPersons = personDao.GetAllPersons(person.getAssociatedUsername());
+
+                assertEquals(persons.size(), findPersons.size());
+                assertTrue(findPersons.contains(person));
+                assertTrue(findPersons.contains(person2));
+            } catch (SQLException ex) {
+                fail(ex.getMessage());
+            }
+        }
+
+        @Test
+        public void TestGetPersonsFail() {
+            try {
+                List<Person> persons = new ArrayList<>() {{add(person);} {add(person2);}};
+                personDao.AddPersons(persons);
+
+                List<Person> findPersons=personDao.GetAllPersons("Garbade");
+
+                assertEquals(0, findPersons.size());
+            } catch (SQLException ex) {
+                fail(ex.getMessage());
+            }
+        }
+
+        @Test
+        public void TestUpdatePerson() {
+            try {
+                personDao = new PersonDao();
+                personDao.AddPerson(person);
+                person.setSpouseID("1234");
+                personDao.UpdatePerson(person);
+
+                Person changed = personDao.GetPerson(person.getPersonID(), person.getAssociatedUsername());
+                assertTrue(person.equals(changed));
+
+                personDao.DeleteAll();
+            } catch (SQLException ex) {
+                fail(ex.getMessage());
+            }
+        }
+
+        @Test
+        public void TestUpdatePersonFail() {
             try {
                 personDao.AddPerson(person);
+
+                person.setAssociatedUsername("1234");
+
+                Person changed = personDao.GetPerson(person.getPersonID(), person.getAssociatedUsername());
+                assertNull(changed);
+            } catch (SQLException ex) {
+                fail(ex.getMessage());
+            }
+        }
+
+        @Test
+        public void TestPersonClear() {
+            try {
+                person.setAssociatedUsername("bob");
+
+                List<Person> persons = new ArrayList<>() {{add(person);} {add(person2);}};
+                personDao.AddPersons(persons);
+                personDao.DeleteAll(person.getAssociatedUsername());
+                assertNull(personDao.GetPerson(person.getPersonID(), person.getAssociatedUsername()));
+
+                List<Person> findPersons = personDao.GetAllPersons(person2.getAssociatedUsername());
+                assertEquals(1, findPersons.size());
+                assertEquals(person2, findPersons.get(0));
+            } catch (SQLException ex) {
+                fail(ex.getMessage());
+            }
+        }
+
+        @Test
+        public void TestPersonClearFail() {
+            try {
+                personDao.AddPerson(person);
+                personDao.DeleteAll("garbade");
+
+                assertNotNull(personDao.GetPerson(person.getPersonID(), person.getAssociatedUsername()));
+            } catch (SQLException ex) {
+                fail(ex.getMessage());
+            }
+        }
+
+        @Test
+        public void TestPersonClearAll() {
+            try {
+                personDao.AddPerson(person);
+                personDao.DeleteAll();
+
+                assertNull(personDao.GetPerson(person.getPersonID(), person.getAssociatedUsername()));
+            } catch (SQLException ex) {
+                fail(ex.getMessage());
+            }
+        }
+
+        @Test
+        public void TestPersonClearAllWithoutAdd() {
+            try {
                 personDao.DeleteAll();
 
                 assertNull(personDao.GetPerson(person.getPersonID(), person.getAssociatedUsername()));
@@ -276,10 +530,12 @@ public class DaoTest {
     @DisplayName("AuthTokenDao Operations")
     class token {
         AuthToken token;
+        AuthToken token2;
         AuthTokenDao tokenDao;
         @BeforeEach
         public void startup() {
             token = new AuthToken("asdf", "bradofrado");
+            token2 = new AuthToken("bcde", "john");
 
             tokenDao = new AuthTokenDao();
             tokenDao.startTransaction();
@@ -335,12 +591,59 @@ public class DaoTest {
         }
 
         @Test
-        public void TestAuthTokenClear() {
+        public void TestAuthTokenClearAll() {
             try {
                 tokenDao.AddAuthToken(token);
                 tokenDao.DeleteAll();
 
                 assertNull(tokenDao.getAuthToken(token.getUsername()));
+            } catch (SQLException ex) {
+                fail(ex.getMessage());
+            }
+        }
+
+        @Test
+        public void TestAuthTokenClearAll2() {
+            try {
+                tokenDao.AddAuthToken(token);
+                tokenDao.AddAuthToken(token2);
+                tokenDao.DeleteAll();
+
+                assertNull(tokenDao.getAuthToken(token.getUsername()));
+                assertNull(tokenDao.getAuthToken(token2.getUsername()));
+            } catch (SQLException ex) {
+                fail(ex.getMessage());
+            }
+        }
+
+        @Test
+        public void TestAuthTokenClear() {
+            try {
+                tokenDao = new AuthTokenDao();
+                tokenDao.AddAuthToken(token);
+                tokenDao.AddAuthToken(token2);
+
+                tokenDao.DeleteAll(token.getUsername());
+
+                assertNull(tokenDao.getAuthToken(token.getAuthtoken()));
+                assertNotNull(tokenDao.getAuthToken(token2.getAuthtoken()));
+
+                tokenDao.DeleteAll();
+            } catch (SQLException ex) {
+                fail(ex.getMessage());
+            }
+        }
+
+        @Test
+        public void TestAuthTokenClearFail() {
+            try {
+                tokenDao = new AuthTokenDao();
+                tokenDao.AddAuthToken(token);
+                tokenDao.DeleteAll("bargade");
+
+                assertNotNull(tokenDao.getAuthToken(token.getAuthtoken()));
+
+                tokenDao.DeleteAll();
             } catch (SQLException ex) {
                 fail(ex.getMessage());
             }
