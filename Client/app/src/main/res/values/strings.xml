@@ -10,6 +10,8 @@
     <string name="username">Username</string>
     <string name="password">Password</string>
     <string name="gender">Gender</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
     <string name="registerButton">Register</string>
     <string name="signinButton">Sign In</string>
 </resources>

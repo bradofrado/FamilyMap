@@ -91,7 +91,7 @@
             android:text="@string/lastName"/>
 
         <EditText
-            android:id="@+id/state"
+            android:id="@+id/lastNameField"
             android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:inputType="textPersonName"
@@ -106,7 +106,7 @@
             android:gravity="end"
             android:text="@string/email"/>
         <EditText
-            android:id="@+id/zip"
+            android:id="@+id/emailField"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="textEmailAddress"
@@ -115,21 +115,41 @@
     </TableRow>
 
     <TableRow>
+
         <TextView
-            android:layout_height="wrap_content"
             android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:gravity="end"
-            android:text="@string/gender"/>
-        <RadioButton
-            android:id="@+id/maleRadio"
+            android:text="@string/gender" />
+
+        <RadioGroup
+            android:id="@+id/genderField"
+            android:orientation="horizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            />
-        <RadioButton
-            android:id="@+id/famaleRadio"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            />
+            android:layout_span="3">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:text="@string/male"/>
+            <RadioButton
+                android:id="@+id/maleRadio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:text="@string/female"/>
+            <RadioButton
+                android:id="@+id/famaleRadio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </RadioGroup>
+
+
     </TableRow>
 
     <LinearLayout
@@ -138,6 +158,7 @@
         android:orientation="horizontal"
         android:paddingTop="20dp"
         android:gravity="center">
+
         <Button
             android:id="@+id/signinButton"
             android:layout_width="wrap_content"
