@@ -15,42 +15,43 @@ import java.net.URL;
 public class ServerFacade {
     private String serverHost;
     private String serverPort;
+    private String authToken;
 
-    public static PersonsResult getPersons() {
-        ServerFacade facade = new ServerFacade();
-        Response response = facade.get("/persons");
+    public PersonsResult getPersons(String authToken) {
+        setAuthToken(authToken);
+
+        Response response = get("/person");
 
         return response.parseData(PersonsResult.class);
     }
 
-    public static EventsResult getEvents() {
-        ServerFacade facade = new ServerFacade();
-        Response response = facade.get("/events");
+    public EventsResult getEvents(String authToken) {
+        setAuthToken(authToken);
+
+        Response response = get("/event");
 
         return response.parseData(EventsResult.class);
     }
 
-    public static LoginResult login(LoginRequest request) {
-        ServerFacade facade = new ServerFacade();
-        Response response = facade.post("/login", Encoder.Encode(request));
+    public LoginResult login(LoginRequest request) {
+        Response response = post("/user/login", Encoder.Encode(request));
 
         return response.parseData(LoginResult.class);
     }
 
-    public static RegisterResult register(RegisterRequest request) {
-        ServerFacade facade = new ServerFacade();
-        Response response = facade.post("/register", Encoder.Encode(request));
+    public RegisterResult register(RegisterRequest request) {
+        Response response = post("/user/register", Encoder.Encode(request));
 
         return response.parseData(RegisterResult.class);
     }
 
-    private ServerFacade(String serverHost, String serverPort) {
+    public ServerFacade(String serverHost, String serverPort) {
         this.serverHost = serverHost;
         this.serverPort = serverPort;
     }
 
-    private ServerFacade() {
-        this("localhost", "8080");
+    private void setAuthToken(String authToken) {
+        this.authToken = authToken;
     }
 
     private Response performRequest(String method, String path, String requestBody) {
@@ -110,7 +111,7 @@ public class ServerFacade {
     }
 
     private String getAuthToken() {
-        return "abc";
+        return authToken;
     }
 
     private void writeString(String str, OutputStream os) throws IOException {
