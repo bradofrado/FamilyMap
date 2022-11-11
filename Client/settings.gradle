@@ -16,3 +16,5 @@ rootProject.name = "FamilyMap"
 include ':app'
 include ':familymapserver'
 include ':familymapmodules'
+include ':modules'
+include ':server'

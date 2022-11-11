@@ -1,0 +1,16 @@
+plugins {
+    id 'java-library'
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+}
+
+dependencies {
+    implementation project(path: ':modules')
+    implementation files('C:/Users/brado/Documents/BYU/CS240/FamilyMapServerStudent/libs/FMSTestingObf.jar')
+    implementation fileTree(dir: 'C:\\Users\\brado\\.m2\\repository\\org\\xerial\\sqlite-jdbc\\3.39.3.0', include: ['*.aar', '*.jar'], exclude: [])
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.1'
+    implementation 'com.google.code.gson:gson:2.10'
+}
