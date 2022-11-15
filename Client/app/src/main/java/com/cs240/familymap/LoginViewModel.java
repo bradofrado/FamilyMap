@@ -2,7 +2,7 @@ package com.cs240.familymap;
 
 import androidx.lifecycle.ViewModel;
 
-public class MainActivityViewModel extends ViewModel {
+public class LoginViewModel extends ViewModel {
     public String getServerHost() {
         return "10.0.2.2";
     }

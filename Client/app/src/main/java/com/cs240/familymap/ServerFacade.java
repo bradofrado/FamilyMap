@@ -95,11 +95,11 @@ public class ServerFacade {
             }
 
 
-        } catch (IOException ex) {
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
 
-        return null;
+        return new Response(null, HttpURLConnection.HTTP_INTERNAL_ERROR);
     }
 
     private Response get(String path) {
