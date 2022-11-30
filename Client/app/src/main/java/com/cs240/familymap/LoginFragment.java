@@ -246,6 +246,7 @@ public class LoginFragment extends Fragment {
 
             if (result.isSuccess()) {
                 DataCache.getInstance().setAuthToken(result.getAuthtoken());
+                DataCache.getInstance().setPersonID(result.getPersonID());
             }
 
             sendMessage(result.isSuccess());
@@ -298,6 +299,7 @@ public class LoginFragment extends Fragment {
 
             if (result.isSuccess()) {
                 DataCache.getInstance().setAuthToken(result.getAuthtoken());
+                DataCache.getInstance().setPersonID(result.getPersonID());
             }
 
             sendMessage(result.isSuccess());

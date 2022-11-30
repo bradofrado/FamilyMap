@@ -29,7 +29,9 @@ public class DataCache {
     }
 
     String authToken;
+    String rootPersonID;
 
+    List<Filter> filters = new ArrayList<>();
     Map<String, Person> allPersons = new HashMap<>();
     Map<String, Event> allEvents = new HashMap<>();
     Map<String, SortedSet<Event>> personEvents = new HashMap<>();
@@ -37,6 +39,8 @@ public class DataCache {
 
     Set<String> paternalAncestors = new HashSet<>();
     Set<String> maternalAncestors = new HashSet<>();
+    Set<String> malePeople = new HashSet<>();
+    Set<String> femalePeople = new HashSet<>();
 
 
     public List<Person> getPersons() {
@@ -44,7 +48,7 @@ public class DataCache {
     }
 
     public List<Event> getEvents() {
-        return new ArrayList<>(allEvents.values());
+        return filterEvents(new ArrayList<>(allEvents.values()));
     }
 
     public String getAuthToken() {
@@ -55,10 +59,40 @@ public class DataCache {
         this.authToken = authToken;
     }
 
+    public String getPersonID() {return rootPersonID;}
+    public void setPersonID(String personID) {
+        rootPersonID = personID;
+    }
+
     public void setPersons(Person[] persons) {
         for (Person person : persons) {
             allPersons.put(person.getPersonID(), person);
+
+            if (person.getGender() == 'm') {
+                malePeople.add(person.getPersonID());
+            }
+
+            if (person.getGender() == 'f') {
+                femalePeople.add(person.getPersonID());
+            }
         }
+
+        Person rootPerson = allPersons.get(rootPersonID);
+        depthFirstAddToList(rootPerson.getFatherID(), paternalAncestors);
+        depthFirstAddToList(rootPerson.getMotherID(), maternalAncestors);
+
+        filters.add(new Filter("Father's Side", "Filter by Father's side of family", paternalAncestors));
+        filters.add(new Filter("Mother's Side", "Filter by mother's side of family", maternalAncestors));
+        filters.add(new Filter("Male Events", "Filter events based on gender", malePeople));
+        filters.add(new Filter("Female Events", "Filter events based on gender", femalePeople));
+    }
+
+    private void depthFirstAddToList(String person, Set<String> list) {
+        if (person == null) return;
+
+        list.add(person);
+        depthFirstAddToList(allPersons.get(person).getFatherID(), list);
+        depthFirstAddToList(allPersons.get(person).getMotherID(), list);
     }
 
     public void setEvents(Event[] events) {
@@ -121,5 +155,52 @@ public class DataCache {
 
     public List<Event> getEventsOfPerson(String personID) {
         return new ArrayList<>(personEvents.get(personID));
+    }
+
+    public List<Event> filterEvents(List<Event> events) {
+        List<Event> filteredEvents = new ArrayList<>(events);
+
+        for (Filter filter : filters) {
+            if (!filter.getState()) {
+                for (int i = filteredEvents.size() - 1; i >= 0; i--) {
+                    if (filter.isContained(filteredEvents.get(i).getPersonID())) {
+                        filteredEvents.remove(i);
+                    }
+                }
+            }
+        }
+
+        return filteredEvents;
+    }
+
+    private class Filter {
+        private String name;
+        private String description;
+        private boolean state;
+        private final Set<String> values;
+
+        public Filter(String name, String description, Set<String> values) {
+            this.name = name;
+            this.description = description;
+            this.values = values;
+            this.state = true;
+        }
+
+        public boolean getState() { return state;}
+        public void setState(boolean state) {
+            this.state = state;
+        }
+
+        public boolean isContained(String value) {
+            return values.contains(value);
+        }
+
+        public String getDescription() {
+            return description;
+        }
+
+        public String getName() {
+            return name;
+        }
     }
 }
