@@ -32,6 +32,10 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class LoginFragment extends Fragment {
+    public interface Listener {
+        void notifyDone();
+    }
+
     private static final String IS_SUCCESS_KEY = "isSucess";
     private EditText serverHostField;
     private EditText serverPortField;
@@ -43,6 +47,8 @@ public class LoginFragment extends Fragment {
 
     private Button registerButton;
     private Button signinButton;
+
+    private Listener listener;
 
     private LoginViewModel getViewModel() {
         return new ViewModelProvider(this).get(LoginViewModel.class);
@@ -178,13 +184,15 @@ public class LoginFragment extends Fragment {
         return view;
     }
 
+    public void registerListener(Listener listener) {
+        this.listener = listener;
+    }
+
     private void doGetDataTask(String serverHost, String serverPort, String firstName, String lastName) {
         Handler getDataHandler = new Handler() {
             @Override
             public void handleMessage(Message message) {
-                String str = "Hello " + firstName + " " + lastName;
-                Toast toast = Toast.makeText(getActivity(), str, Toast.LENGTH_LONG);
-                toast.show();
+                listener.notifyDone();
             }
         };
 

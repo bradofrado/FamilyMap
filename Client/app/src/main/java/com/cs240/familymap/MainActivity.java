@@ -25,7 +25,7 @@ import com.cs240.familymapmodules.results.RegisterResult;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements LoginFragment.Listener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,14 +39,24 @@ public class MainActivity extends AppCompatActivity {
 
             manager.beginTransaction().add(R.id.fragmentContainer, fragment).commit();
         } else {
-//            if (fragment instanceof LoginFragment) {
-//                ((LoginFragment)fragment).registerListener(this);
-//            }
+            if (fragment instanceof LoginFragment) {
+                ((LoginFragment)fragment).registerListener(this);
+            }
         }
     }
 
     private Fragment createLoginFragment() {
-        MapFragment loginFragment = new MapFragment();
+        LoginFragment loginFragment = new LoginFragment();
+        loginFragment.registerListener(this);
         return loginFragment;
+    }
+
+    @Override
+    public void notifyDone() {
+        FragmentManager manager = this.getSupportFragmentManager();
+        Fragment fragment = new MapFragment();
+
+        manager.beginTransaction().replace(R.id.fragmentContainer, fragment)
+                .commit();
     }
 }
