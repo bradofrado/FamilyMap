@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private Fragment createLoginFragment() {
-        LoginFragment loginFragment = new LoginFragment();
+        MapFragment loginFragment = new MapFragment();
         return loginFragment;
     }
 }

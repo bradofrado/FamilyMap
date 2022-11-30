@@ -14,4 +14,8 @@
     <string name="female">Female</string>
     <string name="registerButton">Register</string>
     <string name="signinButton">Sign In</string>
+    <string name="title_activity_maps">MapsActivity</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="mapMenuDefaultText">Click on an event marker to see event details</string>
 </resources>
