@@ -21,6 +21,8 @@ import com.cs240.familymapmodules.results.EventsResult;
 import com.cs240.familymapmodules.results.LoginResult;
 import com.cs240.familymapmodules.results.PersonsResult;
 import com.cs240.familymapmodules.results.RegisterResult;
+import com.joanzapata.iconify.Iconify;
+import com.joanzapata.iconify.fonts.FontAwesomeModule;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -30,6 +32,7 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.Lis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Iconify.with(new FontAwesomeModule());
 
         FragmentManager manager = getSupportFragmentManager();
         Fragment fragment = manager.findFragmentById(R.id.fragmentContainer);

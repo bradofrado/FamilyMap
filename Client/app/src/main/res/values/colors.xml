@@ -7,4 +7,13 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="male_icon">#3F51B5</color>
+    <color name="female_icon">#E816EF</color>
+    <color name="android_icon">#78C257</color>
+    <color name="marker_1">#33FF1D</color>
+    <color name="marker_2">#F30B0B</color>
+    <color name="marker_3">#E45102</color>
+    <color name="marker_4">#E1CC01</color>
+    <color name="marker_5">#0633D3</color>
+    <color name="marker_6">#8405CA</color>
 </resources>

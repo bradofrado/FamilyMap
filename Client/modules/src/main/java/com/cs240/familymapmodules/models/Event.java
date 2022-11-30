@@ -160,4 +160,9 @@ public class Event {
     public int hashCode() {
         return Objects.hash(eventID, associatedUsername, personID, latitude, longitude, country, city, eventType, year);
     }
+
+    @Override
+    public String toString() {
+        return eventType.toUpperCase() + ": " + city + ", " + country + " (" + year + ")";
+    }
 }

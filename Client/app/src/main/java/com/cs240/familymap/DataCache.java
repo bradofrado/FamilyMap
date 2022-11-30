@@ -87,14 +87,6 @@ public class DataCache {
         filters.add(new Filter("Female Events", "Filter events based on gender", femalePeople));
     }
 
-    private void depthFirstAddToList(String person, Set<String> list) {
-        if (person == null) return;
-
-        list.add(person);
-        depthFirstAddToList(allPersons.get(person).getFatherID(), list);
-        depthFirstAddToList(allPersons.get(person).getMotherID(), list);
-    }
-
     public void setEvents(Event[] events) {
         for (Event event : events) {
             allEvents.put(event.getEventID(), event);
@@ -110,20 +102,28 @@ public class DataCache {
                             return o1.getEventID().compareTo(o2.getEventID());
                         }
 
-                        if (o1Type.equals("birth")) {
+                        if (o1Type.equals("birth") || o2Type.equals("death")) {
                             return -1;
                         }
 
-                        if (o2Type.equals("birth")) {
+                        if (o2Type.equals("birth") || o1Type.equals("death")) {
                             return 1;
                         }
 
-                        return o1.getEventID().compareTo(o2.getEventID());
+                        if (o1.getYear() != o2.getYear()) {
+                            return Integer.compare(o1.getYear(), o2.getYear());
+                        }
+
+                        return o1Type.toLowerCase().compareTo(o2Type.toLowerCase());
                     }
                 }));
             }
             personEvents.get(event.getPersonID()).add(event);
         }
+    }
+
+    public Person getPerson(String personID) {
+        return allPersons.get(personID);
     }
 
     public Event getBirthOfSpouse(String personID) {
@@ -171,6 +171,14 @@ public class DataCache {
         }
 
         return filteredEvents;
+    }
+
+    private void depthFirstAddToList(String person, Set<String> list) {
+        if (person == null) return;
+
+        list.add(person);
+        depthFirstAddToList(allPersons.get(person).getFatherID(), list);
+        depthFirstAddToList(allPersons.get(person).getMotherID(), list);
     }
 
     private class Filter {

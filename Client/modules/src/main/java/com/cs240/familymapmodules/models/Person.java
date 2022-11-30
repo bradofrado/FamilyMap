@@ -130,4 +130,9 @@ public class Person {
     public int hashCode() {
         return Objects.hash(personID, associatedUsername, firstName, lastName, gender, fatherID, motherID, spouseID);
     }
+
+    @Override
+    public String toString() {
+        return firstName + " " + lastName;
+    }
 }
