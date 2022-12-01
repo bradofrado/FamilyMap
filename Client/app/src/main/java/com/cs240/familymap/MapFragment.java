@@ -47,6 +47,7 @@ import java.util.Queue;
 public class MapFragment extends Fragment implements OnMapReadyCallback {
     private static final float LINE_WIDTH = 10f;
 
+    private boolean isEventActivity = false;
     private GoogleMap map;
     private DataCache cache = DataCache.getInstance();
 
@@ -58,6 +59,13 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     BaseActivity activity;
 
     private Map<String, Integer> eventColors = new HashMap<>();
+
+    public MapFragment() {}
+
+    public MapFragment(Event selectedEvent) {
+        this.selectedEvent = selectedEvent;
+        isEventActivity = true;
+    }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater layoutInflater, ViewGroup container, Bundle savedInstanceState) {
@@ -100,6 +108,10 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         });
 
         drawEvents(getEvents());
+
+        if (isEventActivity) {
+            selectEvent(selectedEvent);
+        }
     }
 
     private void selectEvent(Event event) {

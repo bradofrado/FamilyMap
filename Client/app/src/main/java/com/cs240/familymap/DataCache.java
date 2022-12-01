@@ -128,6 +128,12 @@ public class DataCache {
         return allPersons.get(personID);
     }
 
+    public Event getEvent(String eventID) {
+        if (eventID == null) return null;
+
+        return allEvents.get(eventID);
+    }
+
     public Event getBirthOfSpouse(String personID) {
         Person person = allPersons.get(personID);
 

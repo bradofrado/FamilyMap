@@ -231,9 +231,9 @@ public class PersonActivity extends BaseActivity {
     }
 
     private void sendToEventActivity(String eventID) {
-//        Intent intent = new Intent(this, EventActivity.class);
-//
-//        intent.putExtra(EventActivity.EVENT_ID_KEY, eventID);
-//        startActivity(intent);
+        Intent intent = new Intent(this, EventActivity.class);
+
+        intent.putExtra(EventActivity.EVENT_ID_KEY, eventID);
+        startActivity(intent);
     }
 }
