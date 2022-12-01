@@ -123,6 +123,8 @@ public class DataCache {
     }
 
     public Person getPerson(String personID) {
+        if (personID == null) return null;
+
         return allPersons.get(personID);
     }
 
@@ -157,6 +159,28 @@ public class DataCache {
         return new ArrayList<>(personEvents.get(personID));
     }
 
+    /**
+     * Gets the family (father, mother, spouse, children) of a person
+     * @param personID The person for which we want the family
+     * @return
+     */
+    public List<Person> getFamilyOfPerson(String personID) {
+        Person person = getPerson(personID);
+        List<Person> family = new ArrayList<>();
+
+        addIfNotNull(family, getPerson(person.getFatherID()));
+        addIfNotNull(family, getPerson(person.getMotherID()));
+        addIfNotNull(family, getPerson(person.getSpouseID()));
+
+        for (Person child : getPersons()) {
+            if (personID.equals(child.getFatherID()) || personID.equals(child.getMotherID())) {
+                family.add(child);
+            }
+        }
+
+        return family;
+    }
+
     public List<Event> filterEvents(List<Event> events) {
         List<Event> filteredEvents = new ArrayList<>(events);
 
@@ -179,6 +203,14 @@ public class DataCache {
         list.add(person);
         depthFirstAddToList(allPersons.get(person).getFatherID(), list);
         depthFirstAddToList(allPersons.get(person).getMotherID(), list);
+    }
+
+    private <T> void addIfNotNull(List<T> list, T item) {
+        if (item == null) {
+            return;
+        }
+
+        list.add(item);
     }
 
     private class Filter {

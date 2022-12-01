@@ -1,5 +1,6 @@
 package com.cs240.familymap;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -44,6 +45,8 @@ import java.util.Queue;
  * My map fragment
  */
 public class MapFragment extends Fragment implements OnMapReadyCallback {
+    private static final float LINE_WIDTH = 10f;
+
     private GoogleMap map;
     private DataCache cache = DataCache.getInstance();
 
@@ -52,24 +55,16 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     private TextView menuTextView;
     private ImageView menuImageView;
     private View menu;
+    BaseActivity activity;
 
     private Map<String, Integer> eventColors = new HashMap<>();
-    private static final Queue<Integer> allColors = new ArrayDeque() {
-        {add(R.color.marker_1);}
-        {add(R.color.marker_2);}
-        {add(R.color.marker_3);}
-        {add(R.color.marker_4);}
-        {add(R.color.marker_5);}
-        {add(R.color.marker_6);}
-    };
-
-    private static final float LINE_WIDTH = 10f;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater layoutInflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(layoutInflater, container, savedInstanceState);
         View view = layoutInflater.inflate(R.layout.fragment_map, container, false);
 
+        activity = (BaseActivity) getContext();
         menuTextView = view.findViewById(R.id.mapTextView);
         menuImageView = view.findViewById(R.id.menuIcon);
         menu = view.findViewById(R.id.menu);
@@ -77,9 +72,9 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
             @Override
             public void onClick(View v) {
                 if (selectedEvent != null) {
-                    Person person = cache.getPerson(selectedEvent.getPersonID());
-                    Toast toast = Toast.makeText(getContext(), "You clikced " + person.toString(), Toast.LENGTH_SHORT);
-                    toast.show();
+                    Intent intent = new Intent(getContext(), PersonActivity.class);
+                    intent.putExtra(PersonActivity.PERSON_ID_KEY, selectedEvent.getPersonID());
+                    startActivity(intent);
                 }
             }
         });
@@ -131,18 +126,11 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         text += event.toString();
         menuTextView.setText(text);
 
-        FontAwesomeIcons icon = FontAwesomeIcons.fa_male;
-        int color = R.color.male_icon;
-        if (person.getGender() == 'f') {
-            icon = FontAwesomeIcons.fa_female;
-            color = R.color.female_icon;
-        }
-
-        menuImageView.setImageDrawable(new IconDrawable(getContext(), icon).sizeDp(40).colorRes(color));
+        menuImageView.setImageDrawable(activity.getPersonDrawable(person.getGender()));
     }
 
     private void drawSpouseLine(Event event) {
-        drawLine(event, cache.getBirthOfSpouse(event.getPersonID()), nextColor(), LINE_WIDTH);
+        drawLine(event, cache.getBirthOfSpouse(event.getPersonID()), BaseActivity.nextColor(), LINE_WIDTH);
     }
 
     private void drawLifeStoryLines(Event event) {
@@ -150,7 +138,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 
 
         for (Event next : events) {
-            drawLine(event, next, nextColor(), LINE_WIDTH);
+            drawLine(event, next, BaseActivity.nextColor(), LINE_WIDTH);
             event = next;
         }
     }
@@ -165,7 +153,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 
     private void drawParentLine(Event event, boolean isFather) {
         Event currEvent = event;
-        int color = nextColor();
+        int color = BaseActivity.nextColor();
         float width = LINE_WIDTH;
         final float WIDTH_CHANGE = .5f;
         do {
@@ -198,12 +186,12 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 
     private void drawEvent(Event event) {
         if (!eventColors.containsKey(event.getEventType())) {
-            eventColors.put(event.getEventType(), nextColor());
+            eventColors.put(event.getEventType(), BaseActivity.nextColor());
         }
 
         int color = eventColors.get(event.getEventType());
         LatLng location = new LatLng(event.getLatitude(), event.getLongitude());
-        Marker marker = map.addMarker(new MarkerOptions().position(location).icon(BitmapDescriptorFactory.fromBitmap(drawableToBitmap(new IconDrawable(getContext(), FontAwesomeIcons.fa_map_marker).sizeDp(40).colorRes(color))))); //BitmapDescriptorFactory.defaultMarker(color)));
+        Marker marker = map.addMarker(new MarkerOptions().position(location).icon(BitmapDescriptorFactory.fromBitmap(drawableToBitmap(activity.getEventIconDrawable(color)))));
 
         marker.setTag(event);
     }
@@ -216,14 +204,5 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         drawable.draw(canvas);
 
         return bitmap;
-    }
-
-    private int nextColor() {
-        int color = allColors.peek();
-
-        allColors.remove();
-        allColors.add(color);
-
-        return color;
     }
 }
