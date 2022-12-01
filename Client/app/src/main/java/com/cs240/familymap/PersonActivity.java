@@ -22,7 +22,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class PersonActivity extends BaseActivity {
+public class PersonActivity extends UpActivity {
     public static final String PERSON_ID_KEY = "PersonIDKey";
     private DataCache cache;
 
