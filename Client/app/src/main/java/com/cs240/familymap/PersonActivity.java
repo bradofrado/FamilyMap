@@ -198,6 +198,22 @@ public class PersonActivity extends BaseActivity {
             text1.setText(text1Text);
             text2.setText(text2Text);
 
+            convertView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    switch (groupPosition) {
+                        case EVENTS_KEY:
+                            sendToEventActivity(events.get(childPosition).getEventID());
+                            break;
+                        case FAMILY_KEY:
+                            sendToPersonActivity(family.get(childPosition).getPersonID());
+                            break;
+                        default:
+                            throw new IllegalArgumentException("Unrecognized group position");
+                    }
+                }
+            });
+
             return convertView;
         }
 
@@ -205,5 +221,19 @@ public class PersonActivity extends BaseActivity {
         public boolean isChildSelectable(int groupPosition, int childPosition) {
             return false;
         }
+    }
+
+    private void sendToPersonActivity(String personID) {
+        Intent intent = new Intent(this, PersonActivity.class);
+
+        intent.putExtra(PERSON_ID_KEY, personID);
+        startActivity(intent);
+    }
+
+    private void sendToEventActivity(String eventID) {
+//        Intent intent = new Intent(this, EventActivity.class);
+//
+//        intent.putExtra(EventActivity.EVENT_ID_KEY, eventID);
+//        startActivity(intent);
     }
 }
