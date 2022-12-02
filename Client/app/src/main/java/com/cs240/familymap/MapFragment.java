@@ -96,9 +96,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     public void onResume() {
         super.onResume();
 
-        if (selectedEvent != null) {
-            selectEvent(selectedEvent);
-        }
+        SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
+        mapFragment.getMapAsync(this);
     }
 
     @Override
@@ -114,10 +113,10 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
             }
         });
 
-        drawEvents(getEvents());
-
-        if (isEventActivity) {
+        if (selectedEvent != null) {
             selectEvent(selectedEvent);
+        } else {
+            drawEvents(getEvents());
         }
     }
 
