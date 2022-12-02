@@ -22,4 +22,19 @@
     <string name="mapMenuDefaultText">Click on an event marker to see event details</string>
     <string name="file">File</string>
     <string name="settings">Settings</string>
+    <string name="logout">Logout</string>
+    <string name="logoutDescription">Return to login screen</string>
+    <string name="lifeStoryName">Life Story Lines</string>
+    <string name="lifeStoryDescription">Show life story lines</string>
+    <string name="familyTreeName">Family Tree Lines</string>
+    <string name="familyTreeDescription">Show family tree lines</string>
+    <string name="spouseName">Spouse Lines</string>
+    <string name="spouseDescription">Show spouse lines</string>
+    <string name="fathersSideName">Father\'s Side</string>
+    <string name="fathersSideDescription">Filter by father\'s side of family</string>
+    <string name="mothersSideName">Mother\'s Side</string>
+    <string name="mothersSideDescription">Filter by mother\'s side of family</string>
+    <string name="maleEventsName">Male Events</string>
+    <string name="genderEventsDescription">Filter events based on gender</string>
+    <string name="femaleEventsName">Female Events</string>
 </resources>

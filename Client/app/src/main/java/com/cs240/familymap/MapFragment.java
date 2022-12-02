@@ -35,6 +35,7 @@ import com.joanzapata.iconify.fonts.FontAwesomeIcons;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * My map fragment
@@ -92,6 +93,15 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+
+        if (selectedEvent != null) {
+            selectEvent(selectedEvent);
+        }
+    }
+
+    @Override
     public void onMapReady(GoogleMap googleMap) {
         map = googleMap;
         map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
@@ -130,8 +140,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 //                startActivity(searchIntent);
                 break;
             case R.id.settingsMenuIcon:
-//                Intent settingsIntent = new Intent(this, SettingsActivity.class);
-//                startActivity(settingsIntent);
+                Intent settingsIntent = new Intent(getContext(), SettingsActivity.class);
+                startActivity(settingsIntent);
                 break;
             default:
                 return super.onOptionsItemSelected(menuItem);
@@ -149,10 +159,21 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         //Draw the markers and events
         map.clear();
         drawEvents(cache.getEvents());
-        drawSpouseLine(event);
-        drawPaternalLines(event);
-        drawMaternalLines(event);
-        drawLifeStoryLines(event);
+
+        Map<Integer, DataCache.Settings> lineSettings = cache.getLines();
+
+        if (lineSettings.get(R.string.lifeStoryName).getState()) {
+            drawSpouseLine(event);
+        }
+
+        if (lineSettings.get(R.string.familyTreeName).getState()) {
+            drawPaternalLines(event);
+            drawMaternalLines(event);
+        }
+
+        if (lineSettings.get(R.string.lifeStoryName).getState()) {
+            drawLifeStoryLines(event);
+        }
 
         //Update the Menu
         updateMenu(event);

@@ -31,7 +31,6 @@ public class DataCache {
     String authToken;
     String rootPersonID;
 
-    List<Filter> filters = new ArrayList<>();
     Map<String, Person> allPersons = new HashMap<>();
     Map<String, Event> allEvents = new HashMap<>();
     Map<String, SortedSet<Event>> personEvents = new HashMap<>();
@@ -41,6 +40,17 @@ public class DataCache {
     Set<String> maternalAncestors = new HashSet<>();
     Set<String> malePeople = new HashSet<>();
     Set<String> femalePeople = new HashSet<>();
+
+    Map<Integer, Filter> filters = new HashMap<>();
+    private final List<Settings> settings = new ArrayList() {
+        {add(new Settings("Life Story Lines", "Show Life Story Lines"));}
+        {add(new Settings("Family Tree Lines", "Show Family Tree Lines"));}
+        {add(new Settings("Spouse Lines", "Show Spouse Lines"));}
+        {add(new Filter("Father's Side", "Filter by Father's Side of Family"));}
+        {add(new Filter("Mother's Side", "Filter by Mother's Side of Family"));}
+        {add(new Filter("Male Events", "Filter Events Based on Gender"));}
+        {add(new Filter("Female Events", "Filter Events Based on Gender"));}
+    };
 
 
     public List<Person> getPersons() {
@@ -81,10 +91,11 @@ public class DataCache {
         depthFirstAddToList(rootPerson.getFatherID(), paternalAncestors);
         depthFirstAddToList(rootPerson.getMotherID(), maternalAncestors);
 
-        filters.add(new Filter("Father's Side", "Filter by Father's side of family", paternalAncestors));
-        filters.add(new Filter("Mother's Side", "Filter by mother's side of family", maternalAncestors));
-        filters.add(new Filter("Male Events", "Filter events based on gender", malePeople));
-        filters.add(new Filter("Female Events", "Filter events based on gender", femalePeople));
+        filters = getFilters();
+        filters.get(R.string.fathersSideName).setValues(paternalAncestors);
+        filters.get(R.string.mothersSideName).setValues(maternalAncestors);
+        filters.get(R.string.maleEventsName).setValues(malePeople);
+        filters.get(R.string.femaleEventsName).setValues(femalePeople);
     }
 
     public void setEvents(Event[] events) {
@@ -190,7 +201,7 @@ public class DataCache {
     public List<Event> filterEvents(List<Event> events) {
         List<Event> filteredEvents = new ArrayList<>(events);
 
-        for (Filter filter : filters) {
+        for (Filter filter : filters.values()) {
             if (!filter.getState()) {
                 for (int i = filteredEvents.size() - 1; i >= 0; i--) {
                     if (filter.isContained(filteredEvents.get(i).getPersonID())) {
@@ -201,6 +212,29 @@ public class DataCache {
         }
 
         return filteredEvents;
+    }
+
+    public Map<Integer, Filter> getFilters() {
+        Map<Integer, Filter> map = new HashMap<>();
+        map.put(R.string.fathersSideName, (Filter)settings.get(3));
+        map.put(R.string.mothersSideName, (Filter)settings.get(4));
+        map.put(R.string.maleEventsName, (Filter)settings.get(5));
+        map.put(R.string.femaleEventsName, (Filter)settings.get(6));
+
+        return map;
+    }
+
+    public Map<Integer, Settings> getLines() {
+        Map<Integer, Settings> map = new HashMap<>();
+        map.put(R.string.lifeStoryName, settings.get(0));
+        map.put(R.string.familyTreeName,settings.get(1));
+        map.put(R.string.spouseName, settings.get(2));
+
+        return map;
+    }
+
+    public List<Settings> getSettings() {
+        return settings;
     }
 
     private void depthFirstAddToList(String person, Set<String> list) {
@@ -219,34 +253,48 @@ public class DataCache {
         list.add(item);
     }
 
-    private class Filter {
-        private String name;
-        private String description;
-        private boolean state;
-        private final Set<String> values;
+    public class Settings {
+        private final String name;
+        private final String description;
 
-        public Filter(String name, String description, Set<String> values) {
+        private boolean state;
+
+        public Settings(String name, String description) {
             this.name = name;
             this.description = description;
-            this.values = values;
-            this.state = true;
+            state = true;
         }
 
-        public boolean getState() { return state;}
-        public void setState(boolean state) {
-            this.state = state;
-        }
-
-        public boolean isContained(String value) {
-            return values.contains(value);
+        public String getName() {
+            return name;
         }
 
         public String getDescription() {
             return description;
         }
 
-        public String getName() {
-            return name;
+        public boolean getState() {
+            return state;
+        }
+
+        public void toggleState() {
+            state = !state;
+        }
+    }
+
+    public class Filter extends Settings {
+        private Set<String> values;
+
+        public Filter(String name, String description) {
+            super(name, description);
+        }
+
+        public void setValues(Set<String> values) {
+            this.values = values;
+        }
+
+        public boolean isContained(String value) {
+            return values.contains(value);
         }
     }
 }
