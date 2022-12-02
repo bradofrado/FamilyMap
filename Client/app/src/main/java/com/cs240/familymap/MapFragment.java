@@ -3,21 +3,19 @@ package com.cs240.familymap;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Icon;
-import android.graphics.fonts.Font;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.cs240.familymapmodules.models.Event;
 import com.cs240.familymapmodules.models.Person;
@@ -25,7 +23,6 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
@@ -35,11 +32,9 @@ import com.google.android.gms.maps.model.PolylineOptions;
 import com.joanzapata.iconify.IconDrawable;
 import com.joanzapata.iconify.fonts.FontAwesomeIcons;
 
-import java.util.ArrayDeque;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Queue;
 
 /**
  * My map fragment
@@ -91,6 +86,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
+        setHasOptionsMenu(!isEventActivity);
+
         return view;
     }
 
@@ -112,6 +109,39 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         if (isEventActivity) {
             selectEvent(selectedEvent);
         }
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.main_menu, menu);
+
+        MenuItem searchMenuItem = menu.findItem(R.id.searchMenuIcon);
+        MenuItem settingsMenuItem = menu.findItem(R.id.settingsMenuIcon);
+
+        setMenuItemIcon(searchMenuItem, FontAwesomeIcons.fa_search, R.color.white);
+        setMenuItemIcon(settingsMenuItem, FontAwesomeIcons.fa_gear, R.color.white);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem menuItem) {
+        switch (menuItem.getItemId()) {
+            case R.id.searchMenuIcon:
+//                Intent searchIntent = new Intent(this, SearchActivity.class);
+//                startActivity(searchIntent);
+                break;
+            case R.id.settingsMenuIcon:
+//                Intent settingsIntent = new Intent(this, SettingsActivity.class);
+//                startActivity(settingsIntent);
+                break;
+            default:
+                return super.onOptionsItemSelected(menuItem);
+        }
+
+        return true;
+    }
+
+    private void setMenuItemIcon(MenuItem menuItem, FontAwesomeIcons icon, int color) {
+        menuItem.setIcon(new IconDrawable(getContext(), icon).colorRes(color).actionBarSize());
     }
 
     private void selectEvent(Event event) {

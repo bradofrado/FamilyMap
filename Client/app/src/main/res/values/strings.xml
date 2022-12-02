@@ -20,4 +20,6 @@
     <string name="lifeEvents">Life Events</string>
     <string name="family">Family</string>
     <string name="mapMenuDefaultText">Click on an event marker to see event details</string>
+    <string name="file">File</string>
+    <string name="settings">Settings</string>
 </resources>
