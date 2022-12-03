@@ -130,4 +130,24 @@ public class ServerFacade {
         }
         return sb.toString();
     }
+
+    private class Response {
+        String body;
+        int responseCode;
+
+        public Response(String body, int responseCode) {
+            this.body = body;
+            this.responseCode = responseCode;
+        }
+
+        public <T> T parseData(Class<T> type) {
+            if (responseCode != HttpURLConnection.HTTP_OK) {
+                Result result = new Result();
+                result.setSuccess(false);
+                String s = Encoder.Encode(result);
+                return Encoder.Decode(s, type);
+            }
+            return Encoder.Decode(body, type);
+        }
+    }
 }

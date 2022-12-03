@@ -1,11 +1,15 @@
-package com.cs240.familymap;
+package com.cs240.familymap.views;
 
 import android.content.Intent;
-import android.os.Build;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
+import com.cs240.familymap.DataCache;
+import com.cs240.familymap.R;
+import com.cs240.familymap.views.EventActivity;
+import com.cs240.familymap.views.MainActivity;
+import com.cs240.familymap.views.PersonActivity;
 import com.joanzapata.iconify.IconDrawable;
 import com.joanzapata.iconify.fonts.FontAwesomeIcons;
 
@@ -16,8 +20,8 @@ import java.util.Queue;
  * A base class for an activity with some helper methods
  */
 public class BaseActivity extends AppCompatActivity {
-    protected static final String PERSON_ID_KEY = "PersonIDKey";
-    protected static final String EVENT_ID_KEY = "EventIDKey";
+    public static final String PERSON_ID_KEY = "PersonIDKey";
+    public static final String EVENT_ID_KEY = "EventIDKey";
 
     private static final Queue<Integer> allColors = new ArrayDeque() {
         {add(R.color.marker_1);}

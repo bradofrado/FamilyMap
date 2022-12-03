@@ -1,4 +1,4 @@
-package com.cs240.familymap;
+package com.cs240.familymap.views;
 
 import androidx.lifecycle.ViewModelProvider;
 
@@ -18,9 +18,12 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
+import com.cs240.familymap.DataCache;
+import com.cs240.familymap.LoginViewModel;
+import com.cs240.familymap.R;
+import com.cs240.familymap.ServerFacade;
 import com.cs240.familymapmodules.requests.LoginRequest;
 import com.cs240.familymapmodules.requests.RegisterRequest;
 import com.cs240.familymapmodules.results.EventsResult;

@@ -1,4 +1,4 @@
-package com.cs240.familymap;
+package com.cs240.familymap.views;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -17,6 +17,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.cs240.familymap.DataCache;
+import com.cs240.familymap.R;
 import com.cs240.familymapmodules.models.Event;
 import com.cs240.familymapmodules.models.Person;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -35,7 +37,6 @@ import com.joanzapata.iconify.fonts.FontAwesomeIcons;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 /**
  * My map fragment
@@ -82,7 +83,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
             public void onClick(View v) {
                 if (selectedEvent != null) {
                     Intent intent = new Intent(getContext(), PersonActivity.class);
-                    intent.putExtra(PersonActivity.PERSON_ID_KEY, selectedEvent.getPersonID());
+                    intent.putExtra(activity.PERSON_ID_KEY, selectedEvent.getPersonID());
                     startActivity(intent);
                 }
             }

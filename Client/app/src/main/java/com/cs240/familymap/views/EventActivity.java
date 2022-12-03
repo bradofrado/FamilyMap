@@ -1,12 +1,13 @@
-package com.cs240.familymap;
+package com.cs240.familymap.views;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.cs240.familymap.DataCache;
+import com.cs240.familymap.R;
 import com.cs240.familymapmodules.models.Event;
 
 public class EventActivity extends UpActivity {

@@ -1,37 +1,14 @@
-package com.cs240.familymap;
+package com.cs240.familymap.views;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.lifecycle.ViewModelProvider;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.RadioGroup;
-import android.widget.Toast;
 
-import com.cs240.familymapmodules.requests.LoginRequest;
-import com.cs240.familymapmodules.requests.PersonsRequest;
-import com.cs240.familymapmodules.requests.RegisterRequest;
-import com.cs240.familymapmodules.results.EventsResult;
-import com.cs240.familymapmodules.results.LoginResult;
-import com.cs240.familymapmodules.results.PersonsResult;
-import com.cs240.familymapmodules.results.RegisterResult;
-import com.joanzapata.iconify.IconDrawable;
+import com.cs240.familymap.DataCache;
+import com.cs240.familymap.R;
 import com.joanzapata.iconify.Iconify;
-import com.joanzapata.iconify.fonts.FontAwesomeIcons;
 import com.joanzapata.iconify.fonts.FontAwesomeModule;
-
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 public class MainActivity extends BaseActivity implements LoginFragment.Listener {
     @Override

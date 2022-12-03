@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginStart="10dp"
-    tools:context=".PersonActivity"
+    tools:context=".views.PersonActivity"
     android:orientation="vertical">
     <LinearLayout
         android:layout_width="match_parent"

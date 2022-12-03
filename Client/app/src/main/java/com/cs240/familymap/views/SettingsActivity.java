@@ -1,21 +1,15 @@
-package com.cs240.familymap;
-
-import androidx.appcompat.app.AppCompatActivity;
+package com.cs240.familymap.views;
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import com.cs240.familymap.DataCache;
+import com.cs240.familymap.R;
+
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.zip.Inflater;
 
 public class SettingsActivity extends UpActivity {
     LinearLayout frameLayout;

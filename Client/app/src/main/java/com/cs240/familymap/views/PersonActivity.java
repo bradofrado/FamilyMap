@@ -1,6 +1,4 @@
-package com.cs240.familymap;
-
-import androidx.appcompat.app.AppCompatActivity;
+package com.cs240.familymap.views;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,14 +8,13 @@ import android.widget.BaseExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.cs240.familymap.DataCache;
+import com.cs240.familymap.R;
 import com.cs240.familymapmodules.models.Event;
 import com.cs240.familymapmodules.models.Person;
 import com.joanzapata.iconify.IconDrawable;
-import com.joanzapata.iconify.fonts.FontAwesomeIcons;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

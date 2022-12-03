@@ -1,7 +1,8 @@
-package com.cs240.familymap;
+package com.cs240.familymap.views;
 
-import android.content.Intent;
 import android.view.MenuItem;
+
+import com.cs240.familymap.views.BaseActivity;
 
 public class UpActivity extends BaseActivity {
     @Override
