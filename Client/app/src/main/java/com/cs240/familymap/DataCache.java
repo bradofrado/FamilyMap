@@ -57,6 +57,10 @@ public class DataCache {
         return new ArrayList<>(allPersons.values());
     }
 
+    /**
+     * Gets and filters all of the events based on configured settings
+     * @return
+     */
     public List<Event> getEvents() {
         return filterEvents(new ArrayList<>(allEvents.values()));
     }
@@ -74,6 +78,10 @@ public class DataCache {
         rootPersonID = personID;
     }
 
+    /**
+     * Sets all of the people and filter data
+     * @param persons
+     */
     public void setPersons(Person[] persons) {
         for (Person person : persons) {
             allPersons.put(person.getPersonID(), person);
@@ -98,6 +106,10 @@ public class DataCache {
         filters.get(R.string.femaleEventsName).setValues(femalePeople);
     }
 
+    /**
+     * Sets the events and personEvents
+     * @param events
+     */
     public void setEvents(Event[] events) {
         for (Event event : events) {
             allEvents.put(event.getEventID(), event);
@@ -145,6 +157,11 @@ public class DataCache {
         return filterEvent(allEvents.get(eventID));
     }
 
+    /**
+     * Gets the birth event of the given person's spouse
+     * @param personID
+     * @return
+     */
     public Event getBirthOfSpouse(String personID) {
         Person person = allPersons.get(personID);
 
@@ -154,6 +171,11 @@ public class DataCache {
         return filterEvent(personEvents.get(person.getSpouseID()).first());
     }
 
+    /**
+     * Gets the birth event of the given person's father
+     * @param personID
+     * @return
+     */
     public Event getBirthOfFather(String personID) {
         Person person = allPersons.get(personID);
 
@@ -163,6 +185,11 @@ public class DataCache {
         return filterEvent(personEvents.get(person.getFatherID()).first());
     }
 
+    /**
+     * Gets the birth event of the given person's mother
+     * @param personID
+     * @return
+     */
     public Event getBirthOfMother(String personID) {
         Person person = allPersons.get(personID);
 
@@ -172,8 +199,13 @@ public class DataCache {
         return filterEvent(personEvents.get(person.getMotherID()).first());
     }
 
+    /**
+     * Gets all of the filtered events for the given person
+     * @param personID
+     * @return
+     */
     public List<Event> getEventsOfPerson(String personID) {
-        return new ArrayList<>(personEvents.get(personID));
+        return filterEvents(new ArrayList<>(personEvents.get(personID)));
     }
 
     /**
@@ -198,6 +230,11 @@ public class DataCache {
         return family;
     }
 
+    /**
+     * Filters all of the events for the current settings
+     * @param events
+     * @return
+     */
     public List<Event> filterEvents(List<Event> events) {
         List<Event> filteredEvents = new ArrayList<>(events);
 
@@ -210,6 +247,11 @@ public class DataCache {
         return filteredEvents;
     }
 
+    /**
+     * Returns the event if this event is ok with the filter settings, null otherwise
+     * @param event
+     * @return
+     */
     public Event filterEvent(Event event) {
         for (Filter filter : filters.values()) {
             //Only look at the filters that are turned off to see if they are contained
@@ -222,6 +264,10 @@ public class DataCache {
         return event;
     }
 
+    /**
+     * Gets all of the filter settings as a map
+     * @return
+     */
     public Map<Integer, Filter> getFilters() {
         Map<Integer, Filter> map = new HashMap<>();
         map.put(R.string.fathersSideName, (Filter)settings.get(3));
@@ -232,6 +278,10 @@ public class DataCache {
         return map;
     }
 
+    /**
+     * Gets all of the line settings as a map
+     * @return
+     */
     public Map<Integer, Settings> getLines() {
         Map<Integer, Settings> map = new HashMap<>();
         map.put(R.string.lifeStoryName, settings.get(0));

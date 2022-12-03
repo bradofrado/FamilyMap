@@ -12,11 +12,19 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+/**
+ * A wrapper class for all of the necessary api calls
+ */
 public class ServerFacade {
     private String serverHost;
     private String serverPort;
     private String authToken;
 
+    /**
+     * Makes a /person api call and returns the result
+     * @param authToken
+     * @return
+     */
     public PersonsResult getPersons(String authToken) {
         setAuthToken(authToken);
 
@@ -25,6 +33,11 @@ public class ServerFacade {
         return response.parseData(PersonsResult.class);
     }
 
+    /**
+     * Makes a /events api call and returns the result
+     * @param authToken
+     * @return
+     */
     public EventsResult getEvents(String authToken) {
         setAuthToken(authToken);
 
@@ -33,12 +46,22 @@ public class ServerFacade {
         return response.parseData(EventsResult.class);
     }
 
+    /**
+     * Makes a /user/login api call and returns the event
+     * @param request
+     * @return
+     */
     public LoginResult login(LoginRequest request) {
         Response response = post("/user/login", Encoder.Encode(request));
 
         return response.parseData(LoginResult.class);
     }
 
+    /**
+     * Makes a /user/register api call and returns the result
+     * @param request
+     * @return
+     */
     public RegisterResult register(RegisterRequest request) {
         Response response = post("/user/register", Encoder.Encode(request));
 

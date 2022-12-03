@@ -77,6 +77,10 @@ public class BaseActivity extends AppCompatActivity {
         return ContextCompat.getColor(this, color);
     }
 
+    /**
+     * Goes to the person activity sending the given personID
+     * @param personID
+     */
     protected void sendToPersonActivity(String personID) {
         Intent intent = new Intent(this, PersonActivity.class);
 
@@ -84,6 +88,10 @@ public class BaseActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    /**
+     * Goes to the event activity sending the given eventID
+     * @param eventID
+     */
     protected void sendToEventActivity(String eventID) {
         Intent intent = new Intent(this, EventActivity.class);
 
@@ -91,11 +99,17 @@ public class BaseActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    /**
+     * Logouts out the user by nulling the authtoken and going to the main activity
+     */
     protected void logout() {
         DataCache.getInstance().setAuthToken(null);
         sendToMainActivity();
     }
 
+    /**
+     * Goes to the main activity and clears the activity history
+     */
     protected void sendToMainActivity() {
         Intent intent = new Intent(this, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP |
