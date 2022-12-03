@@ -10,8 +10,6 @@ import android.os.Bundle;
 import com.cs240.familymapmodules.models.Event;
 
 public class EventActivity extends UpActivity {
-    public static final String EVENT_ID_KEY = "EventId";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

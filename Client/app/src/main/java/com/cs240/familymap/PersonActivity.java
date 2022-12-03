@@ -23,7 +23,6 @@ import java.util.List;
 import java.util.Map;
 
 public class PersonActivity extends UpActivity {
-    public static final String PERSON_ID_KEY = "PersonIDKey";
     private DataCache cache;
 
     private Person person;
@@ -221,19 +220,5 @@ public class PersonActivity extends UpActivity {
         public boolean isChildSelectable(int groupPosition, int childPosition) {
             return false;
         }
-    }
-
-    private void sendToPersonActivity(String personID) {
-        Intent intent = new Intent(this, PersonActivity.class);
-
-        intent.putExtra(PERSON_ID_KEY, personID);
-        startActivity(intent);
-    }
-
-    private void sendToEventActivity(String eventID) {
-        Intent intent = new Intent(this, EventActivity.class);
-
-        intent.putExtra(EventActivity.EVENT_ID_KEY, eventID);
-        startActivity(intent);
     }
 }

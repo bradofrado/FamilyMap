@@ -135,8 +135,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     public boolean onOptionsItemSelected(MenuItem menuItem) {
         switch (menuItem.getItemId()) {
             case R.id.searchMenuIcon:
-//                Intent searchIntent = new Intent(this, SearchActivity.class);
-//                startActivity(searchIntent);
+                Intent searchIntent = new Intent(getContext(), SearchActivity.class);
+                startActivity(searchIntent);
                 break;
             case R.id.settingsMenuIcon:
                 Intent settingsIntent = new Intent(getContext(), SettingsActivity.class);
