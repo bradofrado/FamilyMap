@@ -26,6 +26,14 @@ public class SettingsActivity extends UpActivity {
         setContentView(R.layout.activity_settings);
         frameLayout = findViewById(R.id.settingsFrame);
 
+        View logoutView = findViewById(R.id.logoutView);
+        logoutView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                logout();
+            }
+        });
+
         createAllSettings(DataCache.getInstance().getSettings());
     }
 

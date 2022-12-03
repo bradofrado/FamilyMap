@@ -80,4 +80,16 @@ public class BaseActivity extends AppCompatActivity {
         intent.putExtra(EVENT_ID_KEY, eventID);
         startActivity(intent);
     }
+
+    protected void logout() {
+        DataCache.getInstance().setAuthToken(null);
+        sendToMainActivity();
+    }
+
+    protected void sendToMainActivity() {
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP |
+                Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+    }
 }

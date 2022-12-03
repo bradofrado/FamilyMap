@@ -54,6 +54,32 @@ public class MainActivity extends BaseActivity implements LoginFragment.Listener
         }
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        FragmentManager manager = this.getSupportFragmentManager();
+        Fragment fragment = manager.findFragmentById(R.id.fragmentContainer);
+
+        //If we are logged out, show the login fragment
+        if (DataCache.getInstance().getAuthToken() == null) {
+            //If it isn't already a login fragment
+            if (!(fragment instanceof LoginFragment)) {
+                fragment = createLoginFragment();
+
+                manager.beginTransaction().replace(R.id.fragmentContainer, fragment)
+                        .commit();
+            }
+        } else {
+            if (!(fragment instanceof MapFragment)) {
+                fragment = new MapFragment();
+
+                manager.beginTransaction().replace(R.id.fragmentContainer, fragment)
+                        .commit();
+            }
+        }
+    }
+
     private Fragment createLoginFragment() {
         LoginFragment loginFragment = new LoginFragment();
         loginFragment.registerListener(this);
