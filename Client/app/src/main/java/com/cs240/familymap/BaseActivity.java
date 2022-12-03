@@ -25,7 +25,11 @@ public class BaseActivity extends AppCompatActivity {
         {add(R.color.marker_3);}
         {add(R.color.marker_4);}
         {add(R.color.marker_5);}
-        {add(R.color.marker_1);}
+        {add(R.color.marker_6);}
+        {add(R.color.marker_7);}
+        {add(R.color.marker_8);}
+        {add(R.color.marker_9);}
+        {add(R.color.marker_10);}
     };
 
     /**

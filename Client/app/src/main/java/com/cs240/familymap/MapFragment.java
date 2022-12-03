@@ -45,6 +45,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     private static final String PATERNAL_LINE_KEY = "PaternalLine";
     private static final String MATERNAL_LINE_KEY = "MaternalLine";
     private static final String SPOUSE_LINE_KEY = "SpouseLine";
+    private static final String LIFE_STORY_LINE_KEY = "LifeStoryLine";
 
     private boolean isEventActivity = false;
     private GoogleMap map;
@@ -164,10 +165,17 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     }
 
     private void selectEvent(Event event) {
-        selectedEvent = event;
         //Draw the markers and events
         map.clear();
         drawEvents(cache.getEvents());
+
+        //This makes sure that a setting wasn't set that filtered out the selected event
+        if (cache.filterEvent(event) == null) {
+            deselectEvent();
+            return;
+        }
+
+        selectedEvent = event;
 
         Map<Integer, DataCache.Settings> lineSettings = cache.getLines();
 
@@ -176,8 +184,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         }
 
         if (lineSettings.get(R.string.familyTreeName).getState()) {
-            drawPaternalLines(event);
-            drawMaternalLines(event);
+            drawParentLine(event);
         }
 
         if (lineSettings.get(R.string.lifeStoryName).getState()) {
@@ -192,13 +199,23 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         map.animateCamera(CameraUpdateFactory.newLatLng(location));
     }
 
-    private void updateMenu(Event event) {
-        Person person = cache.getPerson(event.getPersonID());
-        String text = person.toString() + "\n";
-        text += event.toString();
-        menuTextView.setText(text);
+    private void deselectEvent() {
+        selectedEvent = null;
+        updateMenu(null);
+    }
 
-        menuImageView.setImageDrawable(activity.getPersonDrawable(person.getGender()));
+    private void updateMenu(Event event) {
+        if (event != null) {
+            Person person = cache.getPerson(event.getPersonID());
+            String text = person.toString() + "\n";
+            text += event.toString();
+            menuTextView.setText(text);
+
+            menuImageView.setImageDrawable(activity.getPersonDrawable(person.getGender()));
+        } else {
+            menuTextView.setText(R.string.mapMenuDefaultText);
+            menuImageView.setImageDrawable(new IconDrawable(getContext(), FontAwesomeIcons.fa_android).sizeDp(40).colorRes(R.color.android_icon));
+        }
     }
 
     private void drawSpouseLine(Event event) {
@@ -210,42 +227,43 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 
     private void drawLifeStoryLines(Event event) {
         List<Event> events = cache.getEventsOfPerson(event.getPersonID());
+        if (!lineColors.containsKey(LIFE_STORY_LINE_KEY)) {
+            lineColors.put(LIFE_STORY_LINE_KEY, activity.nextColor());
+        }
 
+        int color = lineColors.get(LIFE_STORY_LINE_KEY);
 
         for (Event next : events) {
-            if (!eventColors.containsKey(next.getEventType())) {
-                eventColors.put(next.getEventType(), activity.nextColor());
-            }
-            drawLine(event, next, eventColors.get(next.getEventType()), LINE_WIDTH);
+            drawLine(event, next, color, LINE_WIDTH);
             event = next;
         }
     }
 
-    private void drawPaternalLines(Event event) {
+    private void drawParentLine(Event event) {
+        drawParentLine(event, LINE_WIDTH);
+    }
+
+    private void drawParentLine(Event event, float width) {
+        if (event == null) return;
+
         if (!lineColors.containsKey(PATERNAL_LINE_KEY)) {
             lineColors.put(PATERNAL_LINE_KEY, activity.nextColor());
         }
-        drawParentLine(event, true);
-    }
-
-    private void drawMaternalLines(Event event) {
         if (!lineColors.containsKey(MATERNAL_LINE_KEY)) {
             lineColors.put(MATERNAL_LINE_KEY, activity.nextColor());
         }
-        drawParentLine(event, false);
-    }
 
-    private void drawParentLine(Event event, boolean isFather) {
-        Event currEvent = event;
-        int color = isFather ? lineColors.get(PATERNAL_LINE_KEY) : lineColors.get(MATERNAL_LINE_KEY);
-        float width = LINE_WIDTH;
         final float WIDTH_CHANGE = .5f;
-        do {
-            Event parentEvent = isFather ? cache.getBirthOfFather(currEvent.getPersonID()) : cache.getBirthOfMother(currEvent.getPersonID());
-            drawLine(currEvent, parentEvent, color, width);
-            width *= WIDTH_CHANGE;
-            currEvent = parentEvent;
-        } while (currEvent != null);
+        Event fatherEvent = cache.getBirthOfFather(event.getPersonID());
+        Event motherEvent = cache.getBirthOfMother(event.getPersonID());
+
+        drawLine(event, fatherEvent, lineColors.get(PATERNAL_LINE_KEY), width);
+        drawLine(event, motherEvent, lineColors.get(MATERNAL_LINE_KEY), width);
+
+        width *= WIDTH_CHANGE;
+
+        drawParentLine(fatherEvent, width);
+        drawParentLine(motherEvent, width);
     }
 
     private void drawLine(Event startEvent, Event endEvent, int color, float width) {

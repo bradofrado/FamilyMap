@@ -142,7 +142,7 @@ public class DataCache {
     public Event getEvent(String eventID) {
         if (eventID == null) return null;
 
-        return allEvents.get(eventID);
+        return filterEvent(allEvents.get(eventID));
     }
 
     public Event getBirthOfSpouse(String personID) {
@@ -151,7 +151,7 @@ public class DataCache {
         assert person != null;
         if (!allPersons.containsKey(person.getSpouseID())) return null;
 
-        return personEvents.get(person.getSpouseID()).first();
+        return filterEvent(personEvents.get(person.getSpouseID()).first());
     }
 
     public Event getBirthOfFather(String personID) {
@@ -160,7 +160,7 @@ public class DataCache {
         assert person != null;
         if (person.getFatherID() == null) return null;
 
-        return personEvents.get(person.getFatherID()).first();
+        return filterEvent(personEvents.get(person.getFatherID()).first());
     }
 
     public Event getBirthOfMother(String personID) {
@@ -169,7 +169,7 @@ public class DataCache {
         assert person != null;
         if (person.getMotherID() == null) return null;
 
-        return personEvents.get(person.getMotherID()).first();
+        return filterEvent(personEvents.get(person.getMotherID()).first());
     }
 
     public List<Event> getEventsOfPerson(String personID) {
@@ -201,17 +201,25 @@ public class DataCache {
     public List<Event> filterEvents(List<Event> events) {
         List<Event> filteredEvents = new ArrayList<>(events);
 
-        for (Filter filter : filters.values()) {
-            if (!filter.getState()) {
-                for (int i = filteredEvents.size() - 1; i >= 0; i--) {
-                    if (filter.isContained(filteredEvents.get(i).getPersonID())) {
-                        filteredEvents.remove(i);
-                    }
-                }
+        for (int i = filteredEvents.size() - 1; i >= 0; i--) {
+            if (filterEvent(filteredEvents.get(i)) == null) {
+                filteredEvents.remove(i);
             }
         }
 
         return filteredEvents;
+    }
+
+    public Event filterEvent(Event event) {
+        for (Filter filter : filters.values()) {
+            //Only look at the filters that are turned off to see if they are contained
+            if (filter.getState()) continue;
+            if (filter.isContained(event.getPersonID())) {
+                return null;
+            }
+        }
+
+        return event;
     }
 
     public Map<Integer, Filter> getFilters() {
