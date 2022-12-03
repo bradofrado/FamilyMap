@@ -42,6 +42,9 @@ import java.util.Set;
  */
 public class MapFragment extends Fragment implements OnMapReadyCallback {
     private static final float LINE_WIDTH = 10f;
+    private static final String PATERNAL_LINE_KEY = "PaternalLine";
+    private static final String MATERNAL_LINE_KEY = "MaternalLine";
+    private static final String SPOUSE_LINE_KEY = "SpouseLine";
 
     private boolean isEventActivity = false;
     private GoogleMap map;
@@ -55,6 +58,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     BaseActivity activity;
 
     private Map<String, Integer> eventColors = new HashMap<>();
+    private Map<String, Integer> lineColors = new HashMap<>();
 
     public MapFragment() {}
 
@@ -96,8 +100,14 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     public void onResume() {
         super.onResume();
 
-        SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
-        mapFragment.getMapAsync(this);
+        if (map == null) {
+            SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
+            mapFragment.getMapAsync(this);
+        } else {
+            if (selectedEvent != null) {
+                selectEvent(selectedEvent);
+            }
+        }
     }
 
     @Override
@@ -161,7 +171,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 
         Map<Integer, DataCache.Settings> lineSettings = cache.getLines();
 
-        if (lineSettings.get(R.string.lifeStoryName).getState()) {
+        if (lineSettings.get(R.string.spouseName).getState()) {
             drawSpouseLine(event);
         }
 
@@ -192,7 +202,10 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     }
 
     private void drawSpouseLine(Event event) {
-        drawLine(event, cache.getBirthOfSpouse(event.getPersonID()), BaseActivity.nextColor(), LINE_WIDTH);
+        if (!lineColors.containsKey(SPOUSE_LINE_KEY)) {
+            lineColors.put(SPOUSE_LINE_KEY, activity.nextColor());
+        }
+        drawLine(event, cache.getBirthOfSpouse(event.getPersonID()), lineColors.get(SPOUSE_LINE_KEY), LINE_WIDTH);
     }
 
     private void drawLifeStoryLines(Event event) {
@@ -200,22 +213,31 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 
 
         for (Event next : events) {
-            drawLine(event, next, BaseActivity.nextColor(), LINE_WIDTH);
+            if (!eventColors.containsKey(next.getEventType())) {
+                eventColors.put(next.getEventType(), activity.nextColor());
+            }
+            drawLine(event, next, eventColors.get(next.getEventType()), LINE_WIDTH);
             event = next;
         }
     }
 
     private void drawPaternalLines(Event event) {
+        if (!lineColors.containsKey(PATERNAL_LINE_KEY)) {
+            lineColors.put(PATERNAL_LINE_KEY, activity.nextColor());
+        }
         drawParentLine(event, true);
     }
 
     private void drawMaternalLines(Event event) {
+        if (!lineColors.containsKey(MATERNAL_LINE_KEY)) {
+            lineColors.put(MATERNAL_LINE_KEY, activity.nextColor());
+        }
         drawParentLine(event, false);
     }
 
     private void drawParentLine(Event event, boolean isFather) {
         Event currEvent = event;
-        int color = BaseActivity.nextColor();
+        int color = isFather ? lineColors.get(PATERNAL_LINE_KEY) : lineColors.get(MATERNAL_LINE_KEY);
         float width = LINE_WIDTH;
         final float WIDTH_CHANGE = .5f;
         do {
@@ -248,7 +270,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 
     private void drawEvent(Event event) {
         if (!eventColors.containsKey(event.getEventType())) {
-            eventColors.put(event.getEventType(), BaseActivity.nextColor());
+            eventColors.put(event.getEventType(), activity.nextColor());
         }
 
         int color = eventColors.get(event.getEventType());

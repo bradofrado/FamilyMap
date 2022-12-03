@@ -39,7 +39,6 @@ public class MainActivity extends BaseActivity implements LoginFragment.Listener
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Iconify.with(new FontAwesomeModule());
-
         FragmentManager manager = getSupportFragmentManager();
         Fragment fragment = manager.findFragmentById(R.id.fragmentContainer);
 

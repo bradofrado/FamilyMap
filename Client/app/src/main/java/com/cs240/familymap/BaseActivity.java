@@ -1,8 +1,10 @@
 package com.cs240.familymap;
 
 import android.content.Intent;
+import android.os.Build;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import com.joanzapata.iconify.IconDrawable;
 import com.joanzapata.iconify.fonts.FontAwesomeIcons;
@@ -23,7 +25,7 @@ public class BaseActivity extends AppCompatActivity {
         {add(R.color.marker_3);}
         {add(R.color.marker_4);}
         {add(R.color.marker_5);}
-        {add(R.color.marker_6);}
+        {add(R.color.marker_1);}
     };
 
     /**
@@ -40,7 +42,7 @@ public class BaseActivity extends AppCompatActivity {
      * @return
      */
     public IconDrawable getEventIconDrawable(int color) {
-        return new IconDrawable(this, FontAwesomeIcons.fa_map_marker).sizeDp(40).colorRes(color);
+        return new IconDrawable(this, FontAwesomeIcons.fa_map_marker).sizeDp(40).color(color);
     }
 
     /**
@@ -58,13 +60,13 @@ public class BaseActivity extends AppCompatActivity {
      * Gets a random color
      * @return
      */
-    public static int nextColor() {
+    public int nextColor() {
         int color = allColors.peek();
 
         allColors.remove();
         allColors.add(color);
 
-        return color;
+        return ContextCompat.getColor(this, color);
     }
 
     protected void sendToPersonActivity(String personID) {
