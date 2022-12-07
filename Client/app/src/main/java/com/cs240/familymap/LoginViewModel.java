@@ -15,11 +15,11 @@ public class LoginViewModel extends ViewModel {
     }
 
     public String getUsername() {
-        return "bradofrado";
+        return "sheila";
     }
 
     public String getPassword() {
-        return "eBay";
+        return "parker";
     }
 
     public String getFirstName() {

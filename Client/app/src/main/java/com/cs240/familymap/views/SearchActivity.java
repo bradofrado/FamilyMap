@@ -44,8 +44,8 @@ public class SearchActivity extends UpActivity {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                List<Person> persons = filterPeople(newText);
-                List<Event> events = filterEvents(newText);
+                List<Person> persons = cache.getQueryPersons(newText);
+                List<Event> events = cache.getQueryEvents(newText);
 
                 updateAdapter(persons, events);
 
@@ -55,43 +55,6 @@ public class SearchActivity extends UpActivity {
 
         recyclerView = findViewById(R.id.searchRecyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-    }
-
-    private List<Person> filterPeople(String text) {
-        List<Person> filtered = new ArrayList<>();
-
-        if (text == null || text.length() == 0) return filtered;
-
-        List<Person> persons = cache.getPersons();
-
-        for (Person person : persons) {
-            if (isContained(person.toString(), text)) {
-                filtered.add(person);
-            }
-        }
-
-        return filtered;
-    }
-
-    private List<Event> filterEvents(String text) {
-        List<Event> filtered = new ArrayList<>();
-
-        if (text == null || text.length() == 0) return filtered;
-
-        List<Event> events = cache.getEvents();
-
-        for (Event event : events) {
-            Person personEvent = cache.getPerson(event.getPersonID());
-            if (isContained(personEvent.toString(), text) || isContained(event.toString(), text)) {
-                filtered.add(event);
-            }
-        }
-
-        return filtered;
-    }
-
-    private boolean isContained(String fullText, String query) {
-        return fullText.toLowerCase().contains(query.toLowerCase());
     }
 
     private void updateAdapter(List<Person> persons, List<Event> events) {

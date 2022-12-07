@@ -108,6 +108,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         } else {
             if (selectedEvent != null) {
                 selectEvent(selectedEvent);
+            } else {
+                drawEvents(getEvents());
             }
         }
     }
@@ -234,9 +236,13 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 
         int color = lineColors.get(LIFE_STORY_LINE_KEY);
 
+        Event curr = null;
         for (Event next : events) {
-            drawLine(event, next, color, LINE_WIDTH);
-            event = next;
+            if (curr != null) {
+                drawLine(curr, next, color, LINE_WIDTH);
+            }
+
+            curr = next;
         }
     }
 
@@ -251,7 +257,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
             lineColors.put(PATERNAL_LINE_KEY, activity.nextColor());
         }
         if (!lineColors.containsKey(MATERNAL_LINE_KEY)) {
-            lineColors.put(MATERNAL_LINE_KEY, activity.nextColor());
+            lineColors.put(MATERNAL_LINE_KEY, lineColors.get(PATERNAL_LINE_KEY));
         }
 
         final float WIDTH_CHANGE = .5f;
@@ -288,11 +294,12 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     }
 
     private void drawEvent(Event event) {
-        if (!eventColors.containsKey(event.getEventType())) {
-            eventColors.put(event.getEventType(), activity.nextColor());
+        String eventType = event.getEventType().toLowerCase();
+        if (!eventColors.containsKey(eventType)) {
+            eventColors.put(eventType, activity.nextColor());
         }
 
-        int color = eventColors.get(event.getEventType());
+        int color = eventColors.get(eventType);
         LatLng location = new LatLng(event.getLatitude(), event.getLongitude());
         Marker marker = map.addMarker(new MarkerOptions().position(location).icon(BitmapDescriptorFactory.fromBitmap(drawableToBitmap(activity.getEventIconDrawable(color)))));
 

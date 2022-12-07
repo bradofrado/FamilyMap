@@ -52,6 +52,28 @@ public class DataCache {
         {add(new Filter("Female Events", "Filter Events Based on Gender"));}
     };
 
+    public void resetData() {
+        authToken = null;
+        rootPersonID = null;
+
+        allPersons = new HashMap<>();
+        allEvents = new HashMap<>();
+        personEvents = new HashMap<>();
+
+
+        paternalAncestors = new HashSet<>();
+        maternalAncestors = new HashSet<>();
+        malePeople = new HashSet<>();
+        femalePeople = new HashSet<>();
+
+        for (Filter filter : filters.values()) {
+            if (!filter.getState()) {
+                filter.toggleState();
+            }
+        }
+
+        filters = new HashMap<>();
+    }
 
     public List<Person> getPersons() {
         return new ArrayList<>(allPersons.values());
@@ -118,8 +140,8 @@ public class DataCache {
                 personEvents.put(event.getPersonID(), new TreeSet<>(new Comparator<Event>() {
                     @Override
                     public int compare(Event o1, Event o2) {
-                        String o1Type = o1.getEventType();
-                        String o2Type = o2.getEventType();
+                        String o1Type = o1.getEventType().toLowerCase();
+                        String o2Type = o2.getEventType().toLowerCase();
 
                         if (o1Type.equals(o2Type)) {
                             return o1.getEventID().compareTo(o2.getEventID());
@@ -137,7 +159,7 @@ public class DataCache {
                             return Integer.compare(o1.getYear(), o2.getYear());
                         }
 
-                        return o1Type.toLowerCase().compareTo(o2Type.toLowerCase());
+                        return o1Type.compareTo(o2Type);
                     }
                 }));
             }
@@ -215,6 +237,9 @@ public class DataCache {
      */
     public List<Person> getFamilyOfPerson(String personID) {
         Person person = getPerson(personID);
+
+        if (person == null) return null;
+
         List<Person> family = new ArrayList<>();
 
         addIfNotNull(family, getPerson(person.getFatherID()));
@@ -262,6 +287,53 @@ public class DataCache {
         }
 
         return event;
+    }
+
+    /**
+     * Gets all the people whose name matches the query string
+     * @param text The query string to match
+     * @return
+     */
+    public List<Person> getQueryPersons(String text) {
+        List<Person> filtered = new ArrayList<>();
+
+        if (text == null || text.length() == 0) return filtered;
+
+        List<Person> persons = getPersons();
+
+        for (Person person : persons) {
+            if (isContained(person.toString(), text)) {
+                filtered.add(person);
+            }
+        }
+
+        return filtered;
+    }
+
+    /**
+     * Gets all of the events whose name or person match the query string
+     * @param text The query string to match
+     * @return
+     */
+    public List<Event> getQueryEvents(String text) {
+        List<Event> filtered = new ArrayList<>();
+
+        if (text == null || text.length() == 0) return filtered;
+
+        List<Event> events = getEvents();
+
+        for (Event event : events) {
+            Person personEvent = getPerson(event.getPersonID());
+            if (isContained(personEvent.toString(), text) || isContained(event.toString(), text)) {
+                filtered.add(event);
+            }
+        }
+
+        return filtered;
+    }
+
+    private boolean isContained(String fullText, String query) {
+        return fullText.toLowerCase().contains(query.toLowerCase());
     }
 
     /**
@@ -356,3 +428,12 @@ public class DataCache {
         }
     }
 }
+
+// Clear datacache when logging out
+// Display with original case, but color is case insensitive
+// Name and date for completed astroid
+// Sheila from austrialia to california to both greenland ones
+// Sheila is missing a completed astroid event
+// Sheila's death in china should not connect to birth
+// Make the family tree lines the same color
+// Check filter settings

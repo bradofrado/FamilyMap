@@ -26,10 +26,10 @@ public class BaseActivity extends AppCompatActivity {
     private static final Queue<Integer> allColors = new ArrayDeque() {
         {add(R.color.marker_1);}
         {add(R.color.marker_2);}
-        {add(R.color.marker_3);}
         {add(R.color.marker_4);}
         {add(R.color.marker_5);}
         {add(R.color.marker_6);}
+        {add(R.color.marker_3);}
         {add(R.color.marker_7);}
         {add(R.color.marker_8);}
         {add(R.color.marker_9);}
@@ -103,7 +103,8 @@ public class BaseActivity extends AppCompatActivity {
      * Logouts out the user by nulling the authtoken and going to the main activity
      */
     protected void logout() {
-        DataCache.getInstance().setAuthToken(null);
+        DataCache cache = DataCache.getInstance();
+        cache.resetData();
         sendToMainActivity();
     }
 
