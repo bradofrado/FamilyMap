@@ -125,8 +125,37 @@ public class CalculationsTest {
     }
 
     @Test
-    public void search() {
+    public void searchEvents() {
+        final String QUERY = "a";
+        List<Event> events = cache.getQueryEvents(QUERY);
 
+        assertEquals(16, events.size());
+        assertNotNull(find(events, event -> event.toString().contains(QUERY)));
+    }
+
+    @Test
+    public void searchEventsNone() {
+        final String QUERY = "garbage";
+        List<Event> events = cache.getQueryEvents(QUERY);
+
+        assertEquals(0, events.size());
+    }
+
+    @Test
+    public void searchPeople() {
+        final String QUERY = "a";
+        List<Person> persons = cache.getQueryPersons(QUERY);
+
+        assertEquals(6, persons.size());
+        assertNotNull(find(persons, person -> person.toString().contains(QUERY)));
+    }
+
+    @Test
+    public void searchPeopleNone() {
+        final String QUERY = "garbage";
+        List<Person> persons = cache.getQueryPersons(QUERY);
+
+        assertEquals(0, persons.size());
     }
 
     private <T> T find(List<T> list, Predicate<T> predicate) {

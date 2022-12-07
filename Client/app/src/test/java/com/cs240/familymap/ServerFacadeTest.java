@@ -48,9 +48,9 @@ public class ServerFacadeTest {
         request.setGender('m');
         request.setFirstName("Bob");
         request.setLastName("Dylan");
-        request.setUsername("bobbyboii");
+        request.setUsername("bobbyboiii");
         request.setPassword("bob123");
-        request.setEmail("bobbybobbyyes@gmail.com");
+        request.setEmail("bobbybobbyyess@gmail.com");
 
         RegisterResult result = facade.register(request);
 
