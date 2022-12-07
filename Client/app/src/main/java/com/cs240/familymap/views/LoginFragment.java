@@ -20,10 +20,10 @@ import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
-import com.cs240.familymap.DataCache;
-import com.cs240.familymap.LoginViewModel;
+import com.cs240.familymap.util.DataCache;
+import com.cs240.familymap.models.LoginViewModel;
 import com.cs240.familymap.R;
-import com.cs240.familymap.ServerFacade;
+import com.cs240.familymap.util.ServerFacade;
 import com.cs240.familymapmodules.requests.LoginRequest;
 import com.cs240.familymapmodules.requests.RegisterRequest;
 import com.cs240.familymapmodules.results.EventsResult;
@@ -136,7 +136,7 @@ public class LoginFragment extends Fragment {
                             Toast toast = Toast.makeText(getActivity(), str, Toast.LENGTH_LONG);
                             toast.show();
                         } else {
-                            doGetDataTask(serverHostField.getText().toString(), serverPortField.getText().toString(), firstNameField.getText().toString(), lastNameField.getText().toString());
+                            doGetDataTask(serverHostField.getText().toString(), serverPortField.getText().toString());
                         }
                     }
                 };
@@ -169,7 +169,7 @@ public class LoginFragment extends Fragment {
                             Toast toast = Toast.makeText(getActivity(), str, Toast.LENGTH_LONG);
                             toast.show();
                         } else {
-                            doGetDataTask(serverHostField.getText().toString(), serverPortField.getText().toString(), firstNameField.getText().toString(), lastNameField.getText().toString());
+                            doGetDataTask(serverHostField.getText().toString(), serverPortField.getText().toString());
                         }
                     }
                 };
@@ -191,7 +191,12 @@ public class LoginFragment extends Fragment {
         this.listener = listener;
     }
 
-    private void doGetDataTask(String serverHost, String serverPort, String firstName, String lastName) {
+    /**
+     * Gets the person and event data and puts it in the cache
+     * @param serverHost
+     * @param serverPort
+     */
+    private void doGetDataTask(String serverHost, String serverPort) {
         Handler getDataHandler = new Handler() {
             @Override
             public void handleMessage(Message message) {
@@ -204,6 +209,9 @@ public class LoginFragment extends Fragment {
         executor.submit(getDataTask);
     }
 
+    /**
+     * Watches for text change and calculates if the buttons should be enabled
+     */
     private class ButtonTextWatcher implements TextWatcher {
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -222,6 +230,9 @@ public class LoginFragment extends Fragment {
         }
     }
 
+    /**
+     * A task to login the user
+     */
     private static class LoginTask implements Runnable {
         String username;
         String password;
@@ -265,6 +276,9 @@ public class LoginFragment extends Fragment {
         }
     }
 
+    /**
+     * A task to register the user
+     */
     private static class RegisterTask implements Runnable {
         Handler handler;
         String email;
@@ -318,6 +332,9 @@ public class LoginFragment extends Fragment {
         }
     }
 
+    /**
+     * A task to put the person and event data in the cache
+     */
     private static class GetDataTask implements Runnable {
         Handler handler;
         String serverHost;

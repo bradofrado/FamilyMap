@@ -1,5 +1,6 @@
-package com.cs240.familymap;
+package com.cs240.familymap.util;
 
+import com.cs240.familymap.R;
 import com.cs240.familymapmodules.models.Event;
 import com.cs240.familymapmodules.models.Person;
 
@@ -13,6 +14,9 @@ import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
+/**
+ * Holds and manages the data for the family map client
+ */
 public class DataCache {
     private static DataCache instance;
 
@@ -52,6 +56,9 @@ public class DataCache {
         {add(new Filter("Female Events", "Filter Events Based on Gender"));}
     };
 
+    /**
+     * Resets all of the data in the data cache
+     */
     public void resetData() {
         authToken = null;
         rootPersonID = null;
@@ -383,6 +390,9 @@ public class DataCache {
         list.add(item);
     }
 
+    /**
+     * A holder for the settings in this app and their state
+     */
     public class Settings {
         private final String name;
         private final String description;
@@ -412,6 +422,9 @@ public class DataCache {
         }
     }
 
+    /**
+     * A holder for the filter settings and whether or not an event is in the filter
+     */
     public class Filter extends Settings {
         private Set<String> values;
 
@@ -428,12 +441,3 @@ public class DataCache {
         }
     }
 }
-
-// Clear datacache when logging out
-// Display with original case, but color is case insensitive
-// Name and date for completed astroid
-// Sheila from austrialia to california to both greenland ones
-// Sheila is missing a completed astroid event
-// Sheila's death in china should not connect to birth
-// Make the family tree lines the same color
-// Check filter settings

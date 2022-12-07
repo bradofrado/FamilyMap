@@ -6,7 +6,7 @@ import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.TextView;
 
-import com.cs240.familymap.DataCache;
+import com.cs240.familymap.util.DataCache;
 import com.cs240.familymap.R;
 
 import java.util.List;
@@ -31,12 +31,20 @@ public class SettingsActivity extends UpActivity {
         createAllSettings(DataCache.getInstance().getSettings());
     }
 
+    /**
+     * Creates all of the given settings' UI
+     * @param settings
+     */
     private void createAllSettings(List<DataCache.Settings> settings) {
         for (DataCache.Settings setting : settings) {
             createSettings(setting);
         }
     }
 
+    /**
+     * Creates a single setting's UI
+     * @param settings
+     */
     private void createSettings(DataCache.Settings settings) {
         //LayoutInflater inflater = getLayoutInflater();
         //View view = inflater.inflate(R.layout.setting_line_item, frameLayout, false);

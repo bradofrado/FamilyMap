@@ -1,4 +1,4 @@
-package com.cs240.familymap;
+package com.cs240.familymap.util;
 
 import com.cs240.familymapmodules.requests.*;
 import com.cs240.familymapmodules.results.*;
@@ -154,6 +154,9 @@ public class ServerFacade {
         return sb.toString();
     }
 
+    /**
+     * A holder for the response data and code
+     */
     private class Response {
         String body;
         int responseCode;

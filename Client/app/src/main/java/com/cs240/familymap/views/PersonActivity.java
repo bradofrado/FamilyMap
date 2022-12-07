@@ -9,7 +9,7 @@ import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.cs240.familymap.DataCache;
+import com.cs240.familymap.util.DataCache;
 import com.cs240.familymap.R;
 import com.cs240.familymapmodules.models.Event;
 import com.cs240.familymapmodules.models.Person;

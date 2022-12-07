@@ -2,6 +2,8 @@ package com.cs240.familymap;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import com.cs240.familymap.util.DataCache;
+import com.cs240.familymap.util.ServerFacade;
 import com.cs240.familymapmodules.models.Event;
 import com.cs240.familymapmodules.models.Person;
 import com.cs240.familymapmodules.requests.LoginRequest;

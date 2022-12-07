@@ -17,7 +17,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.cs240.familymap.DataCache;
+import com.cs240.familymap.util.DataCache;
 import com.cs240.familymap.R;
 import com.cs240.familymapmodules.models.Event;
 import com.cs240.familymapmodules.models.Person;
@@ -167,6 +167,10 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         menuItem.setIcon(new IconDrawable(getContext(), icon).colorRes(color).actionBarSize());
     }
 
+    /**
+     * Selects the given event by centering it and drawing the appropriate lines
+     * @param event
+     */
     private void selectEvent(Event event) {
         //Draw the markers and events
         map.clear();
@@ -202,11 +206,18 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         map.animateCamera(CameraUpdateFactory.newLatLng(location));
     }
 
+    /**
+     * Unselects the event and updates the menu accordingly
+     */
     private void deselectEvent() {
         selectedEvent = null;
         updateMenu(null);
     }
 
+    /**
+     * Updates the menu to show the selected event
+     * @param event
+     */
     private void updateMenu(Event event) {
         if (event != null) {
             Person person = cache.getPerson(event.getPersonID());
@@ -273,6 +284,13 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         drawParentLine(motherEvent, width);
     }
 
+    /**
+     * Draws a line in between two events
+     * @param startEvent The start event of the line
+     * @param endEvent The end event of the line
+     * @param color The color of the line
+     * @param width The width of the line
+     */
     private void drawLine(Event startEvent, Event endEvent, int color, float width) {
         if (startEvent == null || endEvent == null) return;
 
@@ -306,6 +324,11 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         marker.setTag(event);
     }
 
+    /**
+     * Converts an IconDrawable to a Bitmap
+     * @param drawable
+     * @return
+     */
     private Bitmap drawableToBitmap(IconDrawable drawable) {
         Bitmap bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
 

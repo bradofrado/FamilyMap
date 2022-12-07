@@ -2,6 +2,7 @@ package com.cs240.familymap;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import com.cs240.familymap.util.ServerFacade;
 import com.cs240.familymapmodules.requests.LoginRequest;
 import com.cs240.familymapmodules.requests.RegisterRequest;
 import com.cs240.familymapmodules.results.EventsResult;

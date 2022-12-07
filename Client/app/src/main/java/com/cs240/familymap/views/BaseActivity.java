@@ -5,11 +5,8 @@ import android.content.Intent;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
-import com.cs240.familymap.DataCache;
+import com.cs240.familymap.util.DataCache;
 import com.cs240.familymap.R;
-import com.cs240.familymap.views.EventActivity;
-import com.cs240.familymap.views.MainActivity;
-import com.cs240.familymap.views.PersonActivity;
 import com.joanzapata.iconify.IconDrawable;
 import com.joanzapata.iconify.fonts.FontAwesomeIcons;
 

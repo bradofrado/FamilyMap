@@ -1,4 +1,4 @@
-package com.cs240.familymap;
+package com.cs240.familymap.models;
 
 import androidx.lifecycle.ViewModel;
 

@@ -11,13 +11,12 @@ import android.widget.ImageView;
 import android.widget.SearchView;
 import android.widget.TextView;
 
-import com.cs240.familymap.DataCache;
+import com.cs240.familymap.util.DataCache;
 import com.cs240.familymap.R;
 import com.cs240.familymapmodules.models.Event;
 import com.cs240.familymapmodules.models.Person;
 import com.joanzapata.iconify.IconDrawable;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
